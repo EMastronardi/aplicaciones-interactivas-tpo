@@ -51,4 +51,9 @@ public class ClienteIndustrialView extends ClienteView {
     public String getCUIT() {
         return CUIT;
     }
+
+    @Override
+    public ViewDataItem getViewType() {
+        return ClienteView.VIEW_INDUSTRIAL;
+    }
 }

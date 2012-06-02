@@ -40,6 +40,11 @@ public class ClienteResidencialView extends ClienteView {
     public String getDni() {
         return dni;
     }
+
+    @Override
+    public ViewDataItem getViewType() {
+        return ClienteView.VIEW_RESIDENCIAL;
+    }
     
     
 }

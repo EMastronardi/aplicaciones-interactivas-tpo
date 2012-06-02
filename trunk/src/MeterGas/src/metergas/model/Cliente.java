@@ -8,13 +8,14 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
 import metergas.model.views.ClienteView;
+import metergas.model.views.ViewDataItem;
 
 /**
  *
  * @author Checho
  */
 public abstract class Cliente {
-
+    
     /**
      * @return the ultimoId
      */
