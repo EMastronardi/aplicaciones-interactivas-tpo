@@ -8,10 +8,11 @@ package metergas.model;
  *
  * @author Checho
  */
-public class Cliente {
+public class ClienteResidencial extends Cliente {
     
-    int id;
-    
+    String nombre;
+    String apellido;
+    int edad;
 
     public Cliente(String nombre){
         this.nombre = nombre;
