@@ -19,6 +19,9 @@ public class VistasManager {
     private VistasManager() {
         vistas = new HashMap<String, JFrameBase>();
         vistas.put("Clientes.Alta", new metergas.vistas.clientes.Alta());
+        vistas.put("Clientes.Formulario.Residencial", new metergas.vistas.clientes.FormularioResidencial());
+        vistas.put("Clientes.Formulario.Industrial", new metergas.vistas.clientes.FormularioIndustrial());
+        
         vistas.put("Clientes.Baja", new metergas.vistas.clientes.Baja());
         vistas.put("Clientes.Modificacion", new metergas.vistas.clientes.Modificacion());
     }

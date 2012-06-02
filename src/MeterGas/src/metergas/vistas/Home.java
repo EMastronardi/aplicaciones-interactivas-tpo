@@ -43,7 +43,7 @@ public class Home extends javax.swing.JFrame {
         jMenuBaja = new javax.swing.JMenuItem();
         jMenuModificacion = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jMenuClientes.setText("Clientes");
         jMenuClientes.addActionListener(new java.awt.event.ActionListener() {
