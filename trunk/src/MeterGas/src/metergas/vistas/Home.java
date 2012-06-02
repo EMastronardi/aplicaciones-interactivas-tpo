@@ -99,7 +99,7 @@ public class Home extends javax.swing.JFrame {
         javax.swing.JPopupMenu parentPopup = (JPopupMenu) source.getParent();
         javax.swing.JMenu menu = (javax.swing.JMenu) parentPopup.getInvoker();
 
-        JFrameBase vista = ViewManager.getInstance().getVista(String.format("%s.%s", menu.getActionCommand(),
+        JFrameBase vista = VistasManager.getInstance().getVista(String.format("%s.%s", menu.getActionCommand(),
                 source.getActionCommand()));
 
 
