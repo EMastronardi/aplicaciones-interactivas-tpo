@@ -12,9 +12,10 @@ import metergas.model.views.ViewConcepto;
  */
 public class Concepto {
     private String concepto;
-    private String valor;
+    private float valor;
+    private int codigo;
     
-    public Concepto(String concepto, String valor){
+    public Concepto(String concepto, float valor){
         this.concepto = concepto;
         this.valor = valor;
     }
@@ -36,19 +37,26 @@ public class Concepto {
     /**
      * @return the valor
      */
-    public String getValor() {
+    public float getValor() {
         return valor;
     }
 
     /**
      * @param valor the valor to set
      */
-    public void setValor(String valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
     
     public ViewConcepto getViewConcepto(){
         return new ViewConcepto(this);
+    }
+
+    /**
+     * @return the codigo
+     */
+    public int getCodigo() {
+        return codigo;
     }
     
 }
