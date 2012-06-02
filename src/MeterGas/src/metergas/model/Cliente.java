@@ -64,24 +64,10 @@ public abstract class Cliente {
     }
 
     /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * @return the domicilio
      */
     public Domicilio getDomicilio() {
         return domicilio;
-    }
-
-    /**
-     * @param domicilio the domicilio to set
-     */
-    public void setDomicilio(Domicilio domicilio) {
-        this.domicilio = domicilio;
     }
 
     /**
@@ -92,24 +78,10 @@ public abstract class Cliente {
     }
 
     /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    /**
      * @return the mediocines
      */
     public Collection<Medicion> getMediciones() {
         return mediciones;
-    }
-
-    /**
-     * @param mediocines the mediocines to set
-     */
-    public void setMediocines(Collection<Medicion> mediciones) {
-        this.mediciones = mediciones;
     }
     
     

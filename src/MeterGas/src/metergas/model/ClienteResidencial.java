@@ -10,9 +10,9 @@ package metergas.model;
  */
 public class ClienteResidencial extends Cliente {
     
-    String nombre;
-    String apellido;
-    String dni;
+    private String nombre;
+    private String apellido;
+    private String dni;
 
     public ClienteResidencial(String nombre, String apellido, String dni, 
             Domicilio dom) {
@@ -27,5 +27,28 @@ public class ClienteResidencial extends Cliente {
     public String getDescripcion() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @return the apellido
+     */
+    public String getApellido() {
+        return apellido;
+    }
+
+    /**
+     * @return the dni
+     */
+    public String getDni() {
+        return dni;
+    }
+    
+    
 }
 
