@@ -5,6 +5,8 @@
 package metergas.model;
 
 import metergas.model.ClienteIndustrial;
+import metergas.model.views.ClienteIndustrialView;
+import metergas.model.views.ClienteView;
 
 /**
  *
@@ -56,5 +58,10 @@ public class ClienteIndustrial extends Cliente {
     @Override
     public String toString() {
         return getRazonSocial();
+    }
+
+    @Override
+    public ClienteView getView() {
+        return new ClienteIndustrialView(razonSocial, nroIIBB, condicionFiscal, CUIT);
     }
 }

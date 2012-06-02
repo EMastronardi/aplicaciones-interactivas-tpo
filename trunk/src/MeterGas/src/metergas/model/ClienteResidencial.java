@@ -4,25 +4,27 @@
  */
 package metergas.model;
 
+import metergas.model.views.ClienteResidencialView;
+import metergas.model.views.ClienteView;
+
 /**
  *
  * @author Checho
  */
 public class ClienteResidencial extends Cliente {
-    
+
     private String nombre;
     private String apellido;
     private String dni;
 
-    public ClienteResidencial(String nombre, String apellido, String dni, 
+    public ClienteResidencial(String nombre, String apellido, String dni,
             Domicilio dom) {
         super(dom);
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-      }
-      
-    
+    }
+
     /**
      * @return the nombre
      */
@@ -46,9 +48,11 @@ public class ClienteResidencial extends Cliente {
 
     @Override
     public String toString() {
-        return getApellido()+ ", " + getNombre();
+        return getApellido() + ", " + getNombre();
     }
-    
-    
-}
 
+    @Override
+    public ClienteView getView() {
+        return new ClienteResidencialView(nombre, apellido, dni);
+    }
+}

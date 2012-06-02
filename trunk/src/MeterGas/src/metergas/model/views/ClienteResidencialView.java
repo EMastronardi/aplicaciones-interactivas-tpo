@@ -13,6 +13,12 @@ public class ClienteResidencialView extends ClienteView {
     private String apellido;
     private String dni;
 
+    public ClienteResidencialView(String nombre, String apellido, String dni) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+    }
+
     /**
      * @return the nombre
      */
