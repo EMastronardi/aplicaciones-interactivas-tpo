@@ -5,7 +5,7 @@
 package metergas.vistas;
 
 import java.util.HashMap;
-import javax.swing.JFrame;
+import metergas.vistas.clientes.JFrameBase;
 
 /**
  *
@@ -14,13 +14,13 @@ import javax.swing.JFrame;
 public class ViewManager {
 
     private static ViewManager instancia;
-    private HashMap<String, JFrame> vistas;
+    private HashMap<String, JFrameBase> vistas;
 
     private ViewManager() {
-        vistas = new HashMap<String, JFrame>();
-        vistas.put("AltaCliente", new metergas.vistas.clientes.Alta());
-        vistas.put("BajaCliente", new metergas.vistas.clientes.Baja());
-        vistas.put("ModificacionCliente", new metergas.vistas.clientes.Modificacion());
+        vistas = new HashMap<String, JFrameBase>();
+        vistas.put("Clientes.Alta", new metergas.vistas.clientes.Alta());
+        vistas.put("Clientes.Baja", new metergas.vistas.clientes.Baja());
+        vistas.put("Clientes.Modificacion", new metergas.vistas.clientes.Modificacion());
     }
 
     public static ViewManager getInstance() {
@@ -30,7 +30,8 @@ public class ViewManager {
         return instancia;
     }
 
-    public JFrame getVista(String vista) throws InstantiationException, IllegalAccessException {
+    public JFrameBase getVista(String vista) {
+        
         return vistas.get(vista);
     }
 }

@@ -8,7 +8,7 @@ package metergas.vistas.clientes;
  *
  * @author eteodoro
  */
-public class Modificacion extends javax.swing.JFrame {
+public class Modificacion extends JFrameBase {
 
     /**
      * Creates new form Modificacion
@@ -85,4 +85,9 @@ public class Modificacion extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void clear() {
+        initComponents();
+    }
 }
