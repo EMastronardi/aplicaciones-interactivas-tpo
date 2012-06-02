@@ -7,6 +7,7 @@ package metergas.model;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
+import metergas.model.views.ClienteView;
 
 /**
  *
@@ -111,5 +112,7 @@ public abstract class Cliente {
     private void addMedicion(Medicion m) {
         getMediciones().add(m);
     }
+    
+    public abstract ClienteView getView();
     
 }

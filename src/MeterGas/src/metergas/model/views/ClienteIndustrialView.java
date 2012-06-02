@@ -8,12 +8,19 @@ package metergas.model.views;
  *
  * @author Checho
  */
-public class ClienteIndustrialView {
+public class ClienteIndustrialView extends ClienteView {
 
     private String razonSocial;
     private String nroIIBB;
     private String condicionFiscal;
     private String CUIT;
+
+    public ClienteIndustrialView(String razonSocial, String nroIIBB, String condicionFiscal, String CUIT) {
+        this.razonSocial = razonSocial;
+        this.nroIIBB = nroIIBB;
+        this.condicionFiscal = condicionFiscal;
+        this.CUIT = CUIT;
+    }
 
     /**
      * @return the razonSocial
