@@ -115,4 +115,7 @@ public abstract class Cliente {
     
     public abstract ClienteView getView();
     
+    public void bajaCliente(){
+        this.estado = "Inactivo";
+    }
 }
