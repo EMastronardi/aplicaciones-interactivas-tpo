@@ -63,7 +63,7 @@ public class Factura {
         this.cliente = c;
     }
     
-    public void generarItemFactura(Concepto c){
-        this.addItemFactura(new ItemFactura(c.getConcepto(),c.getValor()));
+    public void generarItemFactura(String descripcion, float valor){
+        this.addItemFactura(new ItemFactura(descripcion, valor));
     }
 }

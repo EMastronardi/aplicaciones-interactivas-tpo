@@ -58,6 +58,9 @@ public class Concepto {
     public int getCodigo() {
         return codigo;
     }
-    
+
+    public String toString() {
+        return getConcepto() + " - " + String.valueOf(getValor());
+    }
     
 }
