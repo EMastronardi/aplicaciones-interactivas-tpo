@@ -5,6 +5,7 @@
 package metergas.model;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Vector;
 
 /**
@@ -100,6 +101,15 @@ public abstract class Cliente {
     public void liquidarUltimaMedicion(){
         Collections.sort(getMediciones());
         getMediciones().lastElement().setLiquidado(true);
+    }
+    
+    public void generarMedicion(float valor, Date fecha){
+        Medicion m = new Medicion(valor, fecha);
+        addMedicion(m);
+    }
+
+    private void addMedicion(Medicion m) {
+        getMediciones().add(m);
     }
     
 }
