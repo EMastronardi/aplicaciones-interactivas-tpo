@@ -8,9 +8,15 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Vector;
 import metergas.model.Cliente;
+import metergas.model.ClienteResidencial;
+import metergas.model.ClienteIndustrial;
 import metergas.model.Concepto;
+import metergas.model.Domicilio;
 import metergas.model.Factura;
 import metergas.model.views.ClienteView;
+import metergas.model.views.ClienteResidencialView;
+import metergas.model.views.ClienteIndustrialView;
+import metergas.model.views.DomicilioView;
 import metergas.model.views.ViewConcepto;
 import metergas.model.views.ViewDataItem;
 import metergas.model.Liquidador;
@@ -45,80 +51,82 @@ public class MeterGasController {
 
     public Collection<ViewDataItem> getTiposCliente() {
         Collection<ViewDataItem> items = new Vector<ViewDataItem>();
-        
+
         items.add(new ViewDataItem("Residencial", "metergas.vistas.clientes.FormularioResidencial"));
         items.add(new ViewDataItem("Industrial", "metergas.vistas.clientes.FormularioIndustrial"));
 
         return items;
     }
-    
-    private Cliente buscarCliente(int id){
+
+    private Cliente buscarCliente(int id) {
         Cliente cliente;
- 
+
         cliente = null;
-        for (Cliente elemento: clientes){
-            if (elemento.getId() == id){
+        for (Cliente elemento : clientes) {
+            if (elemento.getId() == id) {
                 cliente = elemento;
                 break;
-            }    
+            }
         }
         return cliente;
-        
+
     }
-    
-    public void registrarMedicion(int idCliente, Date fecha, float valor){
+
+    public void registrarMedicion(int idCliente, Date fecha, float valor) {
         Cliente cliente;
-                
+
         cliente = this.buscarCliente(idCliente);
         cliente.generarMedicion(valor, fecha);
     }
-    
-    public void buscarYMostrarCliente(int idCliente){
 
+    public void buscarYMostrarCliente(int idCliente) {
     }
-    
-    private Concepto buscarConcepto(int codigo){
+
+    private Concepto buscarConcepto(int codigo) {
         Concepto concepto;
- 
+
         concepto = null;
-        for (Concepto elemento: conceptos){
-            if (elemento.getCodigo() == codigo){
+        for (Concepto elemento : conceptos) {
+            if (elemento.getCodigo() == codigo) {
                 concepto = elemento;
                 break;
-            }    
+            }
         }
         return concepto;
     }
-    
-    public boolean modificarTarifa(int codigo, String concepto, float valor){
+
+    public boolean modificarTarifa(int codigo, String concepto, float valor) {
         Concepto c;
         boolean resultado;
-        
+
         c = this.buscarConcepto(codigo);
-        if (c.equals(null)){
-            resultado = false;  
-        }    
-        else{
+        if (c.equals(null)) {
+            resultado = false;
+        } else {
             c.setConcepto(concepto);
             c.setValor(valor);
             resultado = true;
         }
-        
+
         return resultado;
     }
-    
-    public ViewConcepto buscarYMostrarConcepto(int codigo){
+
+    public ViewConcepto buscarYMostrarConcepto(int codigo) {
         Concepto concepto;
         ViewConcepto vistaConcepto;
-        
+
         concepto = buscarConcepto(codigo);
         vistaConcepto = concepto.getViewConcepto();
-        
+
         return vistaConcepto;
     }
-    
-    private void addFactura(Factura f){
+
+    private void addFactura(Factura f) {
         this.facturas.add(f);
+    }
+
+    private void addCliente(Cliente c) {
+        this.clientes.add(c);
     }
 
     /**
@@ -127,30 +135,50 @@ public class MeterGasController {
     public float getAcumuladorSubsidios() {
         return acumuladorSubsidios;
     }
-    
-    private void inicializarAcumuladorSubsidios(){
+
+    private void inicializarAcumuladorSubsidios() {
         this.acumuladorSubsidios = 0;
     }
-    
-    public void incrementarAcumuladorSubsidios(float m){
+
+    public void incrementarAcumuladorSubsidios(float m) {
         this.acumuladorSubsidios = this.acumuladorSubsidios + m;
     }
-    
-    public Collection<Liquidador> getLiquidadores(){
+
+    public Collection<Liquidador> getLiquidadores() {
         return this.liquidadores;
     }
-    
-    public void altaCliente(ClienteView vc){
-        
+
+    public void altaCliente(ClienteView vc) {
+        Cliente c = null ;
+        DomicilioView vd;
+        Domicilio d;
+
+        if (vc instanceof ClienteResidencialView) {
+            ClienteResidencialView vcn;
+
+            vcn = (ClienteResidencialView) vc;
+            vd = vc.getDomicilio();
+            d = new Domicilio(vd.getCalle(), vd.getAltura(), vd.getPiso(), vd.getDepartamento(), vd.getCodigoPostal(), vd.getLocalidad(), vd.getProvincia());
+            c = new ClienteResidencial(vcn.getNombre(), vcn.getApellido(), vcn.getDni(), d);
+        } else if (vc instanceof ClienteIndustrialView) {
+            ClienteIndustrialView vcn;
+
+            vcn = (ClienteIndustrialView) vc;
+            vd = vc.getDomicilio();
+            d = new Domicilio(vd.getCalle(), vd.getAltura(), vd.getPiso(), vd.getDepartamento(), vd.getCodigoPostal(), vd.getLocalidad(), vd.getProvincia());
+            c = new ClienteIndustrial(vcn.getRazonSocial(), vcn.getNroIIBB(), vcn.getCondicionFiscal(), vcn.getCUIT(), d);
+
+        }
+
+        this.addCliente(c);
     }
-    
-    public void modificarCliente(ClienteView vc){
-        
+
+    public void modificarCliente(ClienteView vc) {
     }
-    
-    public void eliminarCliente(ClienteView vc){
+
+    public void eliminarCliente(ClienteView vc) {
         Cliente c;
-        
+
         c = this.buscarCliente(vc.getId());
         c.bajaCliente();
     }

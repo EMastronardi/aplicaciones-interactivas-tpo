@@ -8,7 +8,7 @@ package metergas.model.views;
  *
  * @author Checho
  */
-class DomicilioView {
+public class DomicilioView {
 
     private String calle;
     private String altura;
