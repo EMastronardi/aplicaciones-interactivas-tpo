@@ -10,6 +10,7 @@ import java.util.Vector;
 import metergas.model.Cliente;
 import metergas.model.Concepto;
 import metergas.model.Factura;
+import metergas.model.views.ClienteView;
 import metergas.model.views.ViewConcepto;
 import metergas.model.views.ViewDataItem;
 import metergas.model.Liquidador;
@@ -51,7 +52,7 @@ public class MeterGasController {
         return items;
     }
     
-    public Cliente buscarCliente(int id){
+    private Cliente buscarCliente(int id){
         Cliente cliente;
  
         cliente = null;
@@ -76,7 +77,7 @@ public class MeterGasController {
 
     }
     
-    public Concepto buscarConcepto(int codigo){
+    private Concepto buscarConcepto(int codigo){
         Concepto concepto;
  
         concepto = null;
@@ -137,5 +138,20 @@ public class MeterGasController {
     
     public Collection<Liquidador> getLiquidadores(){
         return this.liquidadores;
+    }
+    
+    public void altaCliente(ClienteView vc){
+        
+    }
+    
+    public void modificarCliente(ClienteView vc){
+        
+    }
+    
+    public void eliminarCliente(ClienteView vc){
+        Cliente c;
+        
+        c = this.buscarCliente(vc.getId());
+        c.bajaCliente();
     }
 }
