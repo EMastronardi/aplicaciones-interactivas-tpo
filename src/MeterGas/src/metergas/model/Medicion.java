@@ -4,13 +4,14 @@
  */
 package metergas.model;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
  *
  * @author chalom85
  */
-public class Medicion {
+public class Medicion implements Comparable<Medicion>{
     private float valor;
     private Date fecha;
     private boolean liquidado;
@@ -42,20 +43,20 @@ public class Medicion {
         return liquidado;
     }
 
+    @Override
+    public int compareTo(Medicion o) {
+        if (this.fecha.after(o.getFecha())) return 1;
+        if (this.fecha.after(o.getFecha())) return -1;
+        return 0;
+    }
+
     /**
      * @param liquidado the liquidado to set
      */
-    public void setValor(float valor) {
-        this.valor = valor;
-    }
-    
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    
     public void setLiquidado(boolean liquidado) {
         this.liquidado = liquidado;
     }
+
     
 }
 

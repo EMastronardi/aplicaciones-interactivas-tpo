@@ -4,7 +4,7 @@
  */
 package metergas.model;
 
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Vector;
 
 /**
@@ -31,31 +31,40 @@ public abstract class Cliente {
     private int id;
     private Domicilio domicilio;
     private String estado;
-    private Collection<Medicion>  mediciones;
-    private static int ultimoId;
+    private Vector<Medicion>  mediciones;
+    private static int ultimoId = 0;
+    private Vector<Factura> facturas;
+    
 
     protected Cliente(Domicilio domicilio) {
         this.id = getUltimoId();
         this.domicilio = domicilio;
-        this.estado = new String("Activo");
+        this.estado = "Activo";
         this.mediciones = new Vector<Medicion>();
+        this.facturas = new Vector<Factura>();
     }
 
    
     private Medicion buscarUltimaMedicion(){
+        Collections.sort(getMediciones());
+        getMediciones().lastElement();     
         return null;
     }
 
     private Medicion buscarAnteUltimaMedicion(){
+        if (getMediciones().size() >= 2){
+            return getMediciones().get(getMediciones().size()-2);
+        }
         return null;
     }
 
-    public  float calcularUltimoConsumo(){
-        return 0;
+    public float calcularUltimoConsumo(){
+        
+        return buscarUltimaMedicion().getValor() - buscarAnteUltimaMedicion().getValor();
     }
              
-    public abstract String getDescripcion();
-
+    public abstract String toString();
+    
     /**
      * @return the id
      */
@@ -80,10 +89,17 @@ public abstract class Cliente {
     /**
      * @return the mediocines
      */
-    public Collection<Medicion> getMediciones() {
+    public Vector<Medicion> getMediciones() {
         return mediciones;
     }
     
+    public void addFactura(Factura f){
+        facturas.add(f);
+    }
     
+    public void liquidarUltimaMedicion(){
+        Collections.sort(getMediciones());
+        getMediciones().lastElement().setLiquidado(true);
+    }
     
 }

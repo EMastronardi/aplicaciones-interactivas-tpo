@@ -25,8 +25,6 @@ public class ClienteIndustrial extends Cliente {
         this.CUIT = CUIT;
     }
 
-    
-    
     /**
      * @return the razonSocial
      */
@@ -56,7 +54,7 @@ public class ClienteIndustrial extends Cliente {
     }
 
     @Override
-    public String getDescripcion() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String toString() {
+        return getRazonSocial();
     }
 }
