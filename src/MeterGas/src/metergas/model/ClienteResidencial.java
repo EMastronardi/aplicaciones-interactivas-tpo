@@ -12,19 +12,20 @@ public class ClienteResidencial extends Cliente {
     
     String nombre;
     String apellido;
-    int edad;
+    String dni;
 
-    public Cliente(String nombre){
+    public ClienteResidencial(String nombre, String apellido, String dni, 
+            Domicilio dom) {
+        super(dom);
         this.nombre = nombre;
-    }
+        this.apellido = apellido;
+        this.dni = dni;
+      }
+      
     
-    public Cliente(String nombre, int edad){
-        Cliente(nombre);
-        this.setEdad(edad);
-    }
-    
-    public void setEdad(int edad){
-        this.edad = edad;
+    @Override
+    public String getDescripcion() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
 
