@@ -8,7 +8,7 @@ package metergas.model;
  *
  * @author Checho
  */
-class Domicilio {
+public class Domicilio {
 
     private String calle;
     private String altura;
@@ -17,6 +17,17 @@ class Domicilio {
     private String codigoPostal;
     private String localidad;
     private String provincia;
+
+    public Domicilio(String calle, String altura, String piso, String departamento, String codigoPostal, String localidad, String provincia) {
+        this.calle = calle;
+        this.altura = altura;
+        this.piso = piso;
+        this.departamento = departamento;
+        this.codigoPostal = codigoPostal;
+        this.localidad = localidad;
+        this.provincia = provincia;
+    }
+    
 
     public String toString(){
         return getCalle() + " " + getAltura() + "-" + getPiso() + getDepartamento() + ","
