@@ -13,8 +13,8 @@ public class ItemFactura {
     private String valor;
     
     public ItemFactura(String concepto, String valor){
-        this.setConcepto(concepto);
-        this.setValor(valor);
+        this.concepto = concepto;
+        this.valor = valor;
     }
 
     /**

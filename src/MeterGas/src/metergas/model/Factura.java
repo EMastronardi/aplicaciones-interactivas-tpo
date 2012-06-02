@@ -6,6 +6,7 @@ package metergas.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Vector;
 
 /**
  *
@@ -19,10 +20,7 @@ public class Factura {
     
     public Factura(){
         this.fecha = new Date();
-    }
-    
-    public Factura(Date fecha){
-        this.setFecha(fecha);
+        this.items = new Vector<ItemFactura>();
     }
 
     /**
@@ -57,11 +55,15 @@ public class Factura {
         return 0;
     }
     
-    public void addItemFactura(ItemFactura item){
+    private void addItemFactura(ItemFactura item){
         items.add(item);
     }
     
     public void setCliente(Cliente c){
         this.cliente = c;
+    }
+    
+    public void generarItemFactura(Concepto c){
+        this.addItemFactura(new ItemFactura(c.getConcepto(),c.getValor()));
     }
 }

@@ -15,16 +15,10 @@ public class Medicion {
     private Date fecha;
     private boolean liquidado;
     
-    public Medicion(float valor){
-        this.setValor(valor);
-        this.setFecha(new Date());
-        this.setLiquidado(false);
-    }
-    
     public Medicion(float valor, Date fecha){
-        this.setValor(valor);
-        this.setFecha(fecha);
-        this.setLiquidado(false);
+        this.valor = valor;
+        this.fecha = fecha;
+        this.liquidado = false;
     }
 
     /**
@@ -62,5 +56,6 @@ public class Medicion {
     public void setLiquidado(boolean liquidado) {
         this.liquidado = liquidado;
     }
+    
 }
 
