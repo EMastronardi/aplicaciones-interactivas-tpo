@@ -15,7 +15,8 @@ public class ClienteIndustrialView extends ClienteView {
     private String condicionFiscal;
     private String CUIT;
 
-    public ClienteIndustrialView(String razonSocial, String nroIIBB, String condicionFiscal, String CUIT) {
+    public ClienteIndustrialView(String razonSocial, String nroIIBB, String condicionFiscal, String CUIT, int id, String estado, DomicilioView domicilio) {
+        super(id, estado, domicilio);
         this.razonSocial = razonSocial;
         this.nroIIBB = nroIIBB;
         this.condicionFiscal = condicionFiscal;

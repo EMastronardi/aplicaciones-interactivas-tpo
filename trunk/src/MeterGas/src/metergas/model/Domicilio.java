@@ -4,6 +4,8 @@
  */
 package metergas.model;
 
+import metergas.model.views.DomicilioView;
+
 /**
  *
  * @author Checho
@@ -81,6 +83,10 @@ public class Domicilio {
      */
     public String getProvincia() {
         return provincia;
+    }
+
+    DomicilioView getView() {
+        return new DomicilioView(calle, altura, piso, departamento, codigoPostal, localidad, provincia);
     }
     
     
