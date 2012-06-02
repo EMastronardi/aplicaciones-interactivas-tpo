@@ -10,22 +10,22 @@ import java.util.Collection;
  *
  * @author chalom85
  */
-abstract class Liquidador {
+public abstract class Liquidador {
     protected Collection<Concepto> conceptos;
     
     abstract Factura liquidar(Cliente c);
     
     protected Concepto buscarConcepto(int codigo){
-        Concepto valorRetorno;
+        Concepto c;
  
-        valorRetorno = null;
+        c = null;
         for (Concepto elemento: conceptos){
             if (elemento.getCodigo() == codigo){
-                valorRetorno = elemento;
+                c = elemento;
                 break;
             }    
         }
-        return valorRetorno;
+        return c;
     }
     
 }

@@ -59,4 +59,5 @@ public class Concepto {
         return codigo;
     }
     
+    
 }
