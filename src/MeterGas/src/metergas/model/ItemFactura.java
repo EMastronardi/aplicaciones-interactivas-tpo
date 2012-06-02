@@ -10,9 +10,9 @@ package metergas.model;
  */
 public class ItemFactura {
     private String concepto;
-    private String valor;
+    private float valor;
     
-    public ItemFactura(String concepto, String valor){
+    public ItemFactura(String concepto, float valor){
         this.concepto = concepto;
         this.valor = valor;
     }
@@ -34,14 +34,14 @@ public class ItemFactura {
     /**
      * @return the valor
      */
-    public String getValor() {
+    public float getValor() {
         return valor;
     }
 
     /**
      * @param valor the valor to set
      */
-    public void setValor(String valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 }
