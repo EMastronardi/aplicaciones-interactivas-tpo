@@ -23,11 +23,6 @@ public class ClienteResidencial extends Cliente {
       }
       
     
-    @Override
-    public String getDescripcion() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     /**
      * @return the nombre
      */
@@ -47,6 +42,11 @@ public class ClienteResidencial extends Cliente {
      */
     public String getDni() {
         return dni;
+    }
+
+    @Override
+    public String toString() {
+        return getApellido()+ ", " + getNombre();
     }
     
     
