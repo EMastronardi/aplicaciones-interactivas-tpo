@@ -174,6 +174,9 @@ public class MeterGasController {
     }
 
     public void modificarCliente(ClienteView vc) {
+        Cliente c = this.buscarCliente(vc.getId());
+        
+        c.actualizarCliente(vc);
     }
 
     public void eliminarCliente(int idCliente) {

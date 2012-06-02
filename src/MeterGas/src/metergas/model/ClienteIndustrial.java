@@ -6,7 +6,9 @@ package metergas.model;
 
 import metergas.model.ClienteIndustrial;
 import metergas.model.views.ClienteIndustrialView;
+import metergas.model.views.ClienteResidencialView;
 import metergas.model.views.ClienteView;
+import metergas.model.views.DomicilioView;
 
 /**
  *
@@ -63,5 +65,18 @@ public class ClienteIndustrial extends Cliente {
     @Override
     public ClienteView getView() {
         return new ClienteIndustrialView(razonSocial, nroIIBB, condicionFiscal, CUIT, getId(), CUIT, getDomicilio().getView());
+    }
+
+    public void actualizarCliente(ClienteView vc) {
+        ClienteIndustrialView vcn = (ClienteIndustrialView) vc;
+        DomicilioView vd = vc.getDomicilio();
+        Domicilio d;
+
+        this.razonSocial = vcn.getRazonSocial();
+        this.nroIIBB = vcn.getNroIIBB();
+        this.condicionFiscal = vcn.getCondicionFiscal();
+        this.CUIT = vcn.getCUIT();
+        d = new Domicilio(vd.getCalle(), vd.getAltura(), vd.getPiso(), vd.getDepartamento(), vd.getCodigoPostal(), vd.getLocalidad(), vd.getProvincia());
+        this.setDomicilio(d);
     }
 }
