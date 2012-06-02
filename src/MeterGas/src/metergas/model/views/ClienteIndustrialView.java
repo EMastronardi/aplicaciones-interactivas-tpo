@@ -22,6 +22,7 @@ public class ClienteIndustrialView extends ClienteView {
         this.condicionFiscal = condicionFiscal;
         this.CUIT = CUIT;
     }
+    
 
     /**
      * @return the razonSocial
