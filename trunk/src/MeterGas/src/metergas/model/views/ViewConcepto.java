@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.model;
+package metergas.model.views;
+
+import metergas.model.Concepto;
 
 /**
  *
@@ -12,9 +14,9 @@ public class ViewConcepto {
     private String concepto;
     private String valor;
     
-    public ViewConcepto(String concepto, String valor){
-        this.setConcepto(concepto);
-        this.setValor(valor);
+    public ViewConcepto(Concepto c){
+        this.concepto = c.getConcepto();
+        this.valor = c.getValor();
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package metergas.model;
 
+import metergas.model.views.ViewConcepto;
+
 /**
  *
  * @author chalom85
@@ -13,8 +15,8 @@ public class Concepto {
     private String valor;
     
     public Concepto(String concepto, String valor){
-        this.setConcepto(concepto);
-        this.setValor(valor);
+        this.concepto = concepto;
+        this.valor = valor;
     }
 
     /**
@@ -45,5 +47,8 @@ public class Concepto {
         this.valor = valor;
     }
     
+    public ViewConcepto getViewConcepto(){
+        return new ViewConcepto(this);
+    }
     
 }
