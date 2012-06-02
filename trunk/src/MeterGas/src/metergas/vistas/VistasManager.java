@@ -11,21 +11,21 @@ import metergas.vistas.clientes.JFrameBase;
  *
  * @author eteodoro
  */
-public class ViewManager {
+public class VistasManager {
 
-    private static ViewManager instancia;
+    private static VistasManager instancia;
     private HashMap<String, JFrameBase> vistas;
 
-    private ViewManager() {
+    private VistasManager() {
         vistas = new HashMap<String, JFrameBase>();
         vistas.put("Clientes.Alta", new metergas.vistas.clientes.Alta());
         vistas.put("Clientes.Baja", new metergas.vistas.clientes.Baja());
         vistas.put("Clientes.Modificacion", new metergas.vistas.clientes.Modificacion());
     }
 
-    public static ViewManager getInstance() {
+    public static VistasManager getInstance() {
         if (instancia == null) {
-            instancia = new ViewManager();
+            instancia = new VistasManager();
         }
         return instancia;
     }
