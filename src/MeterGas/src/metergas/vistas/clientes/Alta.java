@@ -132,6 +132,8 @@ public class Alta extends JFrameBase {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
             MeterGasController.getInstance().altaCliente(formulario.getCliente());
+            
+            this.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,18 +8,20 @@ package metergas.model.views;
  *
  * @author Checho
  */
-public class ClienteView {
-
+public abstract class ClienteView {
+    public static final ViewDataItem VIEW_INDUSTRIAL = new ViewDataItem("Industrial", "metergas.vistas.clientes.FormularioIndustrial");
+    public static final ViewDataItem VIEW_RESIDENCIAL = new ViewDataItem("Residencial", "metergas.vistas.clientes.FormularioResidencial");
     int id;
     String estado;
     DomicilioView domicilio;
-
+    
     public ClienteView(int id, String estado, DomicilioView domicilio) {
         this.id = id;
         this.estado = estado;
         this.domicilio = domicilio;
     }
-
+    
+    public abstract ViewDataItem getViewType();
     
     public int getId() {
         return id;

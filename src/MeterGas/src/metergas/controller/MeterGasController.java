@@ -52,8 +52,8 @@ public class MeterGasController {
     public Collection<ViewDataItem> getTiposCliente() {
         Collection<ViewDataItem> items = new Vector<ViewDataItem>();
 
-        items.add(new ViewDataItem("Residencial", "metergas.vistas.clientes.FormularioResidencial"));
-        items.add(new ViewDataItem("Industrial", "metergas.vistas.clientes.FormularioIndustrial"));
+        items.add(ClienteView.VIEW_RESIDENCIAL);
+        items.add(ClienteView.VIEW_INDUSTRIAL);
 
         return items;
     }
@@ -69,7 +69,6 @@ public class MeterGasController {
             }
         }
         return cliente;
-
     }
 
     public void registrarMedicion(int idCliente, Date fecha, float valor) {
@@ -79,7 +78,11 @@ public class MeterGasController {
         cliente.generarMedicion(valor, fecha);
     }
 
-    public void buscarYMostrarCliente(int idCliente) {
+    public ClienteView buscarYMostrarCliente(int idCliente) {
+        if(buscarCliente(idCliente) != null)
+            return buscarCliente(idCliente).getView();
+        
+       return null;
     }
 
     private Concepto buscarConcepto(int codigo) {
@@ -149,7 +152,7 @@ public class MeterGasController {
     }
 
     public void altaCliente(ClienteView vc) {
-        Cliente c = null ;
+        Cliente c = null;
         DomicilioView vd;
         Domicilio d;
 
