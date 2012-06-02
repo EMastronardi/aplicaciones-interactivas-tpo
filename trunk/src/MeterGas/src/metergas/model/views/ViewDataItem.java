@@ -30,5 +30,11 @@ public class ViewDataItem {
         this.descripcion = descripcion;
         this.codigo = codigo;
     }
+
+    @Override
+    public String toString() {
+        return this.descripcion;
+    }
+    
     
 }

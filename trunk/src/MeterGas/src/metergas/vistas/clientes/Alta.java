@@ -4,23 +4,29 @@
  */
 package metergas.vistas.clientes;
 
-import java.util.Vector;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+import metergas.controller.MeterGasController;
+import metergas.model.views.ViewDataItem;
 
 /**
  *
  * @author eteodoro
  */
 public class Alta extends JFrameBase {
-    
+
+    private FormularioCliente formulario = null;
+
     /**
      * Creates new form Alta
      */
     public Alta() {
         initComponents();
-        
+        cargarCombo();
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,37 +38,110 @@ public class Alta extends JFrameBase {
     private void initComponents() {
 
         jComboTiposCliente = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        pnlFormulario = new javax.swing.JPanel();
+        btnCrear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jComboTiposCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboTiposCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboTiposClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tipo de cliente");
+
+        btnCrear.setText("Crear");
+        btnCrear.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jComboTiposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)
+                        .addGap(34, 34, 34)
+                        .addComponent(jComboTiposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 162, Short.MAX_VALUE))
+                    .addComponent(pnlFormulario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCrear)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboTiposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboTiposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(btnCrear)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void jComboTiposClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTiposClienteActionPerformed
+        formulario = null;
+        pnlFormulario.removeAll();
+        if (jComboTiposCliente.getSelectedItem() == null || jComboTiposCliente.getSelectedItem().toString().equals("Seleccione")) {
+            btnCrear.setEnabled(false);
+            return;
+        }
+        btnCrear.setEnabled(true);
+        ViewDataItem itemSeleccionado = (ViewDataItem) jComboTiposCliente.getSelectedItem();
+        
+        try {
+            try {
+                JPanel formularioView = (JPanel) Class.forName(itemSeleccionado.getCodigo()).newInstance();
+                formularioView.setVisible(true);
+
+                pnlFormulario.add((JPanel) formularioView);
+                
+                this.pack();
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_jComboTiposClienteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCrear;
     private javax.swing.JComboBox jComboTiposCliente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel pnlFormulario;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void clear() {
+        jComboTiposCliente.setSelectedIndex(0);
+
+    }
+
+    private void cargarCombo() {
+        Collection<ViewDataItem> tiposCliente = MeterGasController.getInstance().getTiposCliente();
+
+        jComboTiposCliente.removeAllItems();
+
+        jComboTiposCliente.addItem("Seleccione");
+        for (ViewDataItem viewDataItem : tiposCliente) {
+            jComboTiposCliente.addItem(viewDataItem);
+        }
     }
 }
