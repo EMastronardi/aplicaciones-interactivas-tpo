@@ -15,6 +15,7 @@ public class LiquidadorResidencial extends Liquidador{
         this.conceptos = new Vector<Concepto>();
     }
     
+    @Override
     public Factura liquidar(Cliente c){
         return new Factura();
     }

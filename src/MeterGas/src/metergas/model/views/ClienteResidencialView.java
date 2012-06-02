@@ -13,7 +13,8 @@ public class ClienteResidencialView extends ClienteView {
     private String apellido;
     private String dni;
 
-    public ClienteResidencialView(String nombre, String apellido, String dni) {
+    public ClienteResidencialView(String nombre, String apellido, String dni, int id, String estado, DomicilioView domicilio) {
+        super(id, estado, domicilio);
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;

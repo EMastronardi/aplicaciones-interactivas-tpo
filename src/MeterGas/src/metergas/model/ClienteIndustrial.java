@@ -62,6 +62,6 @@ public class ClienteIndustrial extends Cliente {
 
     @Override
     public ClienteView getView() {
-        return new ClienteIndustrialView(razonSocial, nroIIBB, condicionFiscal, CUIT);
+        return new ClienteIndustrialView(razonSocial, nroIIBB, condicionFiscal, CUIT, getId(), CUIT, getDomicilio().getView());
     }
 }

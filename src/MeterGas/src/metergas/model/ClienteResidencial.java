@@ -53,6 +53,6 @@ public class ClienteResidencial extends Cliente {
 
     @Override
     public ClienteView getView() {
-        return new ClienteResidencialView(nombre, apellido, dni);
+        return new ClienteResidencialView(nombre, apellido, dni, getId(), apellido, getDomicilio().getView());
     }
 }

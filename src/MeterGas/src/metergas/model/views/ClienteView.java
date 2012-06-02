@@ -14,6 +14,13 @@ public class ClienteView {
     String estado;
     DomicilioView domicilio;
 
+    public ClienteView(int id, String estado, DomicilioView domicilio) {
+        this.id = id;
+        this.estado = estado;
+        this.domicilio = domicilio;
+    }
+
+    
     public int getId() {
         return id;
     }
