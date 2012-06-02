@@ -8,7 +8,7 @@ package metergas.vistas.clientes;
  *
  * @author eteodoro
  */
-public class Baja extends javax.swing.JFrame {
+public class Baja extends JFrameBase {
 
     /**
      * Creates new form Baja
@@ -85,4 +85,9 @@ public class Baja extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void clear() {
+        initComponents();
+    }
 }

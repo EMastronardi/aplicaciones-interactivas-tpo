@@ -4,9 +4,12 @@
  */
 package metergas.vistas;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JMenuItem;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JPopupMenu;
+import javax.swing.WindowConstants;
+import metergas.vistas.clientes.JFrameBase;
 
 /**
  *
@@ -14,11 +17,15 @@ import javax.swing.JMenuItem;
  */
 public class Home extends javax.swing.JFrame {
 
+    private JFrame ventanaPrincipal;
+
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
+        ventanaPrincipal = this;
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -41,17 +48,32 @@ public class Home extends javax.swing.JFrame {
         jMenuClientes.setText("Clientes");
         jMenuClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuClientesActionPerformed(evt);
+                jMenuActionPerformed(evt);
             }
         });
 
         jMenuAlta.setText("Alta");
+        jMenuAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
         jMenuClientes.add(jMenuAlta);
 
         jMenuBaja.setText("Baja");
+        jMenuBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
         jMenuClientes.add(jMenuBaja);
 
         jMenuModificacion.setText("Modificacion");
+        jMenuModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
         jMenuClientes.add(jMenuModificacion);
 
         jMenuBar.add(jMenuClientes);
@@ -72,21 +94,33 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClientesActionPerformed
-        try {
-            javax.swing.JMenuItem source = (javax.swing.JMenuItem)evt.getSource();
-            javax.swing.JMenu parent = (javax.swing.JMenu)source.getParent();
+    private void jMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActionPerformed
+        javax.swing.JMenuItem source = (javax.swing.JMenuItem) evt.getSource();
+        javax.swing.JPopupMenu parentPopup = (JPopupMenu) source.getParent();
+        javax.swing.JMenu menu = (javax.swing.JMenu) parentPopup.getInvoker();
 
-            javax.swing.JFrame vista = ViewManager.getInstance().getVista(String.format("%parent.%vista", source.getActionCommand(),
-                    parent.getActionCommand()));
-            
-            
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jMenuClientesActionPerformed
+        JFrameBase vista = ViewManager.getInstance().getVista(String.format("%s.%s", menu.getActionCommand(),
+                source.getActionCommand()));
+
+
+        vista.addWindowListener(new WindowAdapter() {
+
+            public void windowClosed(WindowEvent arg0) {
+                JFrameBase vistaCerrada = (JFrameBase)arg0.getSource();
+                vistaCerrada.clear();
+                
+                ventanaPrincipal.setFocusableWindowState(true);
+                ventanaPrincipal.setVisible(true);
+            }
+        });
+
+        vista.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
+        vista.setVisible(true);
+        this.setVisible(false);
+
+
+    }//GEN-LAST:event_jMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,4 +170,18 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuClientes;
     private javax.swing.JMenuItem jMenuModificacion;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the ventanaPrincipal
+     */
+    public JFrame getVentanaPrincipal() {
+        return ventanaPrincipal;
+    }
+
+    /**
+     * @param ventanaPrincipal the ventanaPrincipal to set
+     */
+    public void setVentanaPrincipal(JFrame ventanaPrincipal) {
+        this.ventanaPrincipal = ventanaPrincipal;
+    }
 }
