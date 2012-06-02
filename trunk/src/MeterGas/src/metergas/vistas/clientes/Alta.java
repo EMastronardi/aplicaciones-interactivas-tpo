@@ -4,6 +4,7 @@
  */
 package metergas.vistas.clientes;
 
+import metergas.vistas.clientes.contratos.FormularioClienteInterface;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ import metergas.model.views.ViewDataItem;
  */
 public class Alta extends JFrameBase {
 
-    private FormularioCliente formulario = null;
+    private FormularioClienteInterface formulario = null;
 
     /**
      * Creates new form Alta
@@ -56,6 +57,11 @@ public class Alta extends JFrameBase {
 
         btnCrear.setText("Crear");
         btnCrear.setEnabled(false);
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,6 +101,7 @@ public class Alta extends JFrameBase {
     private void jComboTiposClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTiposClienteActionPerformed
         formulario = null;
         pnlFormulario.removeAll();
+        this.pack();
         if (jComboTiposCliente.getSelectedItem() == null || jComboTiposCliente.getSelectedItem().toString().equals("Seleccione")) {
             btnCrear.setEnabled(false);
             return;
@@ -108,7 +115,7 @@ public class Alta extends JFrameBase {
                 formularioView.setVisible(true);
 
                 pnlFormulario.add((JPanel) formularioView);
-                
+                formulario = (FormularioClienteInterface)formularioView;
                 this.pack();
             } catch (InstantiationException ex) {
                 Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,6 +128,14 @@ public class Alta extends JFrameBase {
 
 
     }//GEN-LAST:event_jComboTiposClienteActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        try {
+            MeterGasController.getInstance().altaCliente(formulario.getCliente());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCrearActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
