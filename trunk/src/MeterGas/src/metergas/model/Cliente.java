@@ -118,4 +118,13 @@ public abstract class Cliente {
     public void bajaCliente(){
         this.estado = "Inactivo";
     }
+    
+    public abstract void actualizarCliente(ClienteView vc);
+
+    /**
+     * @param domicilio the domicilio to set
+     */
+    protected void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
+    }
 }
