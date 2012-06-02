@@ -176,10 +176,10 @@ public class MeterGasController {
     public void modificarCliente(ClienteView vc) {
     }
 
-    public void eliminarCliente(ClienteView vc) {
+    public void eliminarCliente(int idCliente) {
         Cliente c;
 
-        c = this.buscarCliente(vc.getId());
+        c = this.buscarCliente(idCliente);
         c.bajaCliente();
     }
 }
