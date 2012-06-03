@@ -7,7 +7,8 @@ package metergas.vistas.clientes;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-import metergas.model.views.ViewDataItem;
+import metergas.controller.MeterGasController;
+import metergas.model.views.ClienteView;
 import metergas.vistas.clientes.contratos.FormularioClienteInterface;
 
 /**
@@ -109,28 +110,32 @@ public class Modificacion extends JFrameBase {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        formulario = null;
+        ClienteView cliente = MeterGasController.getInstance().buscarYMostrarCliente(Integer.parseInt(txtIdCliente.getText().trim()));
         pnlFormulario.removeAll();
         this.pack();
-      
-        ViewDataItem itemSeleccionado = (ViewDataItem) jComboTiposCliente.getSelectedItem();
-        
-        try {
+        formulario = null;
+        if (cliente != null) {
             try {
-                JPanel formularioView = (JPanel) Class.forName(itemSeleccionado.getCodigo()).newInstance();
-                formularioView.setVisible(true);
+                try {
+                    JPanel formularioView = (JPanel) Class.forName(cliente.getViewType().getCodigo()).newInstance();
+                    formularioView.setVisible(true);
 
-                pnlFormulario.add((JPanel) formularioView);
-                formulario = (FormularioClienteInterface)formularioView;
-                this.pack();
-            } catch (InstantiationException ex) {
-                Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
+                    pnlFormulario.add((JPanel) formularioView);
+                    
+                    formulario = (FormularioClienteInterface) formularioView;
+                    formulario.cargarCliente(cliente);
+                    this.pack();
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        btnGuardar.setEnabled(formulario != null);
 
     }//GEN-LAST:event_btnBuscarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
