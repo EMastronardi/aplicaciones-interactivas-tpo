@@ -201,7 +201,8 @@ public class MeterGasController {
                         sub = factura.getSubsidio();
                         if (sub > 0){
                             this.incrementarAcumuladorSubsidios(sub);
-                        }    
+                        } 
+                        break;
                     }
                 }
             }
@@ -259,6 +260,17 @@ public class MeterGasController {
         con.add(buscarConcepto(ConceptoEnum.IIBB.getTipoConcepto()));
         
         liquidadores.add(new LiquidadorIndustrial(con));
+    }
+
+    public void imprimirFacturas() {
+        for (Factura factura : facturas) {
+            System.out.println(factura.toString());
+        }
+        ;
+    }
+
+    public void imprimirSubsidio() {
+        System.out.println(getAcumuladorSubsidios());
     }
     
 }

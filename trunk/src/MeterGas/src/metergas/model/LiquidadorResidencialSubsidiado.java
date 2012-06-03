@@ -29,8 +29,8 @@ public class LiquidadorResidencialSubsidiado extends LiquidadorResidencial {
             if (factura.getTotal() < topeSubsidio.getValor()) {
                 sub = factura.getTotal() * -1 * (subsidio.getValor() / 100);
                 factura.generarItemFactura(subsidio.getConcepto(), sub);
-                factura.setSubsidio(sub);
-                return new Factura();
+                factura.setSubsidio(sub * -1);
+                return factura;
             }
         }
         return null;

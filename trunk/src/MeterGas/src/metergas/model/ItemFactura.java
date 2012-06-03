@@ -44,4 +44,9 @@ public class ItemFactura {
     public void setValor(float valor) {
         this.valor = valor;
     }
+    
+    public String toString(){
+        return getConcepto() + " - " + String.valueOf(getValor());
+        
+    }
 }
