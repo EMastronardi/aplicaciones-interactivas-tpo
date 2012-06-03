@@ -5,6 +5,7 @@
 package metergas.model;
 
 import java.util.Collection;
+import java.util.Vector;
 
 /**
  *
@@ -14,6 +15,12 @@ public abstract class Liquidador {
     
     
     protected Collection<Concepto> conceptos;
+
+    protected Liquidador(Collection<Concepto> conceptos) {
+        this.conceptos = new Vector<Concepto>();
+        this.conceptos.addAll(conceptos);
+    }
+
     
     public abstract Factura liquidar(Cliente c);
     

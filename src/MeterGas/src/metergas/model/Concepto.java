@@ -14,13 +14,14 @@ public class Concepto {
     private String concepto;
     private float valor;
     private int codigo;
-    
-    public Concepto(String concepto, float valor){
+
+    public Concepto(String concepto, float valor, int codigo) {
         this.concepto = concepto;
         this.valor = valor;
+        this.codigo = codigo;
     }
-
-    /**
+    
+     /**
      * @return the concepto
      */
     public String getConcepto() {

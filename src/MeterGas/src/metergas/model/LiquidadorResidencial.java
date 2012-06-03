@@ -4,6 +4,7 @@
  */
 package metergas.model;
 
+import java.util.Collection;
 import java.util.Vector;
 
 /**
@@ -12,8 +13,8 @@ import java.util.Vector;
  */
 public class LiquidadorResidencial extends Liquidador {
 
-    public LiquidadorResidencial() {
-        this.conceptos = new Vector<Concepto>();
+    public LiquidadorResidencial(Collection<Concepto> conceptos) {
+        super(conceptos);
     }
 
     @Override
@@ -26,14 +27,13 @@ public class LiquidadorResidencial extends Liquidador {
     protected Factura liquidarBase(Cliente c) {
         if (c instanceof ClienteResidencial) {
             /*
-             * Valor de base: consumo * valor metro
-             * IVA Consumidor Final
-             * Contribuciones 
+             * Valor de base: consumo * valor metro IVA Consumidor Final
+             * Contribuciones
              */
-            
+
             float acumulado;
             Factura f = new Factura();
-            
+
             Concepto valorM3 = buscarConcepto(ConceptoEnum.M3RESIDENCIAL.getTipoConcepto());
             Concepto IVA = buscarConcepto(ConceptoEnum.IVACONSUMIDORFINAL.getTipoConcepto());
             Concepto ContribMuni = buscarConcepto(ConceptoEnum.CONTRIBUCIONESMUNICIPALES.getTipoConcepto());
@@ -45,7 +45,7 @@ public class LiquidadorResidencial extends Liquidador {
             acumulado = acumulado * 1 + (ContribMuni.getValor() / 100);
             f.generarItemFactura(IVA.toString(), acumulado);
 
-            
+
             return f;
 
         }
