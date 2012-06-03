@@ -32,6 +32,7 @@ public class LiquidadorResidencial extends Liquidador {
              */
 
             float acumulado;
+            float actual;
             Factura f = new Factura();
 
             Concepto valorM3 = buscarConcepto(ConceptoEnum.M3RESIDENCIAL.getTipoConcepto());
@@ -40,12 +41,14 @@ public class LiquidadorResidencial extends Liquidador {
 
             acumulado = valorM3.getValor() * c.calcularUltimoConsumo();
             f.generarItemFactura(valorM3.toString(), acumulado);
-            acumulado = acumulado * 1 + (IVA.getValor() / 100);
-            f.generarItemFactura(IVA.toString(), acumulado);
-            acumulado = acumulado * 1 + (ContribMuni.getValor() / 100);
-            f.generarItemFactura(IVA.toString(), acumulado);
+            actual = acumulado * (IVA.getValor() / 100);
+            acumulado+=actual;
+            f.generarItemFactura(IVA.toString(), actual);
+            actual = acumulado * (ContribMuni.getValor() / 100);
+            acumulado+=actual;
+            f.generarItemFactura(ContribMuni.toString(), actual);
 
-
+            
             return f;
 
         }

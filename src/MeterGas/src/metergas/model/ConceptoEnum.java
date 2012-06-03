@@ -24,7 +24,7 @@ public enum ConceptoEnum {
     private int tipoConcepto;
     
     private ConceptoEnum(int concepto){
-        this.tipoConcepto = tipoConcepto;
+        this.tipoConcepto = concepto;
     }
     
     public int getTipoConcepto(){

@@ -15,12 +15,12 @@ import metergas.model.views.ViewDataItem;
  * @author Checho
  */
 public abstract class Cliente {
-    
+
     /**
      * @return the ultimoId
      */
     public static int getUltimoId() {
-        ultimoId ++;
+        ultimoId++;
         return ultimoId;
     }
 
@@ -30,14 +30,12 @@ public abstract class Cliente {
     private static void setUltimoId(int aUltimoId) {
         ultimoId = aUltimoId;
     }
-
     private int id;
     private Domicilio domicilio;
     private String estado;
-    private Vector<Medicion>  mediciones;
+    private Vector<Medicion> mediciones;
     private static int ultimoId = 0;
     private Vector<Factura> facturas;
-    
 
     protected Cliente(Domicilio domicilio) {
         this.id = getUltimoId();
@@ -47,27 +45,39 @@ public abstract class Cliente {
         this.facturas = new Vector<Factura>();
     }
 
-   
-    private Medicion buscarUltimaMedicion(){
+    private Medicion buscarUltimaMedicion() {
         Collections.sort(getMediciones());
-        getMediciones().lastElement();     
-        return null;
+        return getMediciones().lastElement();
     }
 
-    private Medicion buscarAnteUltimaMedicion(){
-        if (getMediciones().size() >= 2){
-            return getMediciones().get(getMediciones().size()-2);
+    private Medicion buscarAnteUltimaMedicion() {
+        if (getMediciones().size() >= 2) {
+            return getMediciones().get(getMediciones().size() - 2);
         }
         return null;
     }
 
-    public float calcularUltimoConsumo(){
-        
-        return buscarUltimaMedicion().getValor() - buscarAnteUltimaMedicion().getValor();
+    public float calcularUltimoConsumo() {
+        Medicion ultima = buscarUltimaMedicion();
+        if (ultima != null){
+            float ult = ultima.getValor();
+            Medicion anteUltima = buscarAnteUltimaMedicion();
+            if (anteUltima != null){
+                float anteu = anteUltima.getValor();
+                return ultima.getValor() - anteUltima.getValor();
+            }
+            else {
+                return ult;
+            }
+            
+        } 
+        else {
+            return 0;
+        }
     }
-             
+
     public abstract String toString();
-    
+
     /**
      * @return the id
      */
@@ -95,17 +105,17 @@ public abstract class Cliente {
     public Vector<Medicion> getMediciones() {
         return mediciones;
     }
-    
-    public void addFactura(Factura f){
+
+    public void addFactura(Factura f) {
         facturas.add(f);
     }
-    
-    public void liquidarUltimaMedicion(){
+
+    public void liquidarUltimaMedicion() {
         Collections.sort(getMediciones());
         getMediciones().lastElement().setLiquidado(true);
     }
-    
-    public void generarMedicion(float valor, Date fecha){
+
+    public void generarMedicion(float valor, Date fecha) {
         Medicion m = new Medicion(valor, fecha);
         addMedicion(m);
     }
@@ -113,13 +123,13 @@ public abstract class Cliente {
     private void addMedicion(Medicion m) {
         getMediciones().add(m);
     }
-    
+
     public abstract ClienteView getView();
-    
-    public void bajaCliente(){
+
+    public void bajaCliente() {
         this.estado = "Inactivo";
     }
-    
+
     public abstract void actualizarCliente(ClienteView vc);
 
     /**

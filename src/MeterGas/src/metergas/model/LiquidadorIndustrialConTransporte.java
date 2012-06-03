@@ -24,10 +24,10 @@ public class LiquidadorIndustrialConTransporte extends LiquidadorIndustrial{
             Concepto topeSinTransporte = buscarConcepto(ConceptoEnum.TOPESINTRANSPORTE.getTipoConcepto());
             Concepto transporte = buscarConcepto(ConceptoEnum.TRANSPORTE.getTipoConcepto());
             float tran;
-            if (factura.getTotal() < topeSinTransporte.getValor()) {
+            if (c.calcularUltimoConsumo() > topeSinTransporte.getValor()) {
                 tran = factura.getTotal() * (transporte.getValor() / 100);
                 factura.generarItemFactura(transporte.getConcepto(), tran);
-                return new Factura();
+                return factura;
             }
             return super.liquidarBase(c);
         }

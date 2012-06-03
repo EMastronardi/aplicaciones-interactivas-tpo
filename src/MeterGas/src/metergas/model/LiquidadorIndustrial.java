@@ -34,19 +34,21 @@ public class LiquidadorIndustrial extends Liquidador {
              */
             
             float acumulado;
+            float actual;
             Factura f = new Factura();
             
             Concepto valorM3 = buscarConcepto(ConceptoEnum.M3INDUSTRIAL.getTipoConcepto());
             Concepto IVA = buscarConcepto(ConceptoEnum.IVARESPONSABLE.getTipoConcepto());
             Concepto IIBB = buscarConcepto(ConceptoEnum.IIBB.getTipoConcepto());
-            Concepto ContribMuni = buscarConcepto(ConceptoEnum.CONTRIBUCIONESMUNICIPALES.getTipoConcepto());
 
             acumulado = valorM3.getValor() * c.calcularUltimoConsumo();
             f.generarItemFactura(valorM3.toString(), acumulado);
-            acumulado = acumulado * 1 + (IVA.getValor() / 100);
-            f.generarItemFactura(IVA.toString(), acumulado);
-            acumulado = acumulado * 1 + (ContribMuni.getValor() / 100);
-            f.generarItemFactura(IVA.toString(), acumulado);
+            actual = acumulado * (IVA.getValor() / 100);
+            acumulado += actual;
+            f.generarItemFactura(IVA.toString(), actual);
+            actual = acumulado * (IIBB.getValor() / 100);
+            acumulado += actual;
+            f.generarItemFactura(IIBB.toString(), actual);
 
             
             return f;

@@ -187,13 +187,20 @@ public class Home extends javax.swing.JFrame {
 
         mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
         mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
-        mg.registrarMedicion(2, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(2, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(2, new Date(2012, 03, 10), 50);
+        mg.registrarMedicion(2, new Date(2012, 05, 10), 400);
         mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
         mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
         mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(4, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(4, new Date(2012, 05, 10), 1000);
         
+        mg.eliminarCliente(2);
+        
+        mg.generarLiquidacion();
+        
+        mg.imprimirFacturas();
+        
+        mg.imprimirSubsidio();
         
         /*
          * Invocacion de la ventana principal
