@@ -114,7 +114,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        vista.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        vista.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         vista.setVisible(true);
         this.setVisible(false);
