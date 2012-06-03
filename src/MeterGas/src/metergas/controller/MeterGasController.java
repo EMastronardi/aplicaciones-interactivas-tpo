@@ -188,4 +188,32 @@ public class MeterGasController {
         c = this.buscarCliente(idCliente);
         c.bajaCliente();
     }
+    
+    public void generarLiquidacion(){
+        Factura factura = null;
+        float sub;
+        
+        inicializarAcumuladorSubsidios();
+        for (Cliente elementoCliente : clientes) {
+            if (elementoCliente.getEstado() == "Activo") {
+                for (Liquidador elementoLiquidador: liquidadores){
+                    factura = elementoLiquidador.liquidar(elementoCliente);
+                    if (factura != null){
+                        factura.setCliente(elementoCliente);
+                        elementoCliente.addFactura(factura);
+                        elementoCliente.liquidarUltimaMedicion();
+                        this.addFactura(factura);
+                        // si aplico subsidio actualizo el acumulador de subsidios
+                        sub = factura.getSubsidio();
+                        if (sub > 0){
+                            this.incrementarAcumuladorSubsidios(sub);
+                        }    
+                    }
+                }
+            }
+        }
+        if (this.getAcumuladorSubsidios() > 0){
+            LiquidacionSubsidioSubject.getInstance().notifySubsidiosAplicados(this.getAcumuladorSubsidios());
+        }
+    }
 }
