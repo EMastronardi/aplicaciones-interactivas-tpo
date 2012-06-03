@@ -18,16 +18,17 @@ public class LiquidadorResidencialSubsidiado extends LiquidadorResidencial {
 
     public Factura liquidar(Cliente c) {
 
-        Concepto topeSubsidio = buscarConcepto(ConceptoEnum.TOPESUBSIDIORESIDENCIAL.getTipoConcepto());
-        Concepto subsidio = buscarConcepto(ConceptoEnum.SUBSIDIORESIDENCIAL.getTipoConcepto());
-        float sub;
         Factura factura = super.liquidarBase(c);
 
 
         if (factura != null) {
+            Concepto topeSubsidio = buscarConcepto(ConceptoEnum.TOPESUBSIDIORESIDENCIAL.getTipoConcepto());
+            Concepto subsidio = buscarConcepto(ConceptoEnum.SUBSIDIORESIDENCIAL.getTipoConcepto());
+            float sub;
             if (factura.getTotal() < topeSubsidio.getValor()) {
                 sub = factura.getTotal() * -1 * (subsidio.getValor() / 100);
                 factura.generarItemFactura(subsidio.getConcepto(), sub);
+                factura.setSubsidio(sub);
                 return new Factura();
             }
         }

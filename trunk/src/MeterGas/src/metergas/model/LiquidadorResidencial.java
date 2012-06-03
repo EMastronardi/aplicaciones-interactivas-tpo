@@ -27,7 +27,7 @@ public class LiquidadorResidencial extends Liquidador {
         if (c instanceof ClienteResidencial) {
             /*
              * Valor de base: consumo * valor metro
-             * IVA
+             * IVA Consumidor Final
              * Contribuciones 
              */
             
@@ -35,7 +35,7 @@ public class LiquidadorResidencial extends Liquidador {
             Factura f = new Factura();
             
             Concepto valorM3 = buscarConcepto(ConceptoEnum.M3RESIDENCIAL.getTipoConcepto());
-            Concepto IVA = buscarConcepto(ConceptoEnum.IVA.getTipoConcepto());
+            Concepto IVA = buscarConcepto(ConceptoEnum.IVACONSUMIDORFINAL.getTipoConcepto());
             Concepto ContribMuni = buscarConcepto(ConceptoEnum.CONTRIBUCIONESMUNICIPALES.getTipoConcepto());
 
             acumulado = valorM3.getValor() * c.calcularUltimoConsumo();
