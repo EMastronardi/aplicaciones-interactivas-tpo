@@ -11,13 +11,13 @@ package metergas.controller;
 public class LiquidacionSubsidioSubject {
     
     private static LiquidacionSubsidioSubject instance = new LiquidacionSubsidioSubject();
-    private static float totalSubsidio;
+    private float totalSubsidio;
 
     static LiquidacionSubsidioSubject getInstance(){
         return instance;
     }
     
-    public static void notifySubsidiosAplicados(float total){
+    public void notifySubsidiosAplicados(float total){
         totalSubsidio += total;
     }
 }
