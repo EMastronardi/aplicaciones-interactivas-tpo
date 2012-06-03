@@ -66,4 +66,13 @@ public class Factura {
     public void generarItemFactura(String descripcion, float valor){
         this.addItemFactura(new ItemFactura(descripcion, valor));
     }
+
+    public float getTotal() {
+        float total = 0;
+        for (ItemFactura itemFactura : items) {
+            total += itemFactura.getValor();
+        }
+        return total;
+        
+    }
 }

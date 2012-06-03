@@ -42,19 +42,11 @@ public class LiquidadorResidencial extends Liquidador {
             f.generarItemFactura(valorM3.toString(), acumulado);
             acumulado = acumulado * 1 + (IVA.getValor() / 100);
             f.generarItemFactura(IVA.toString(), acumulado);
-            acumulado = acumulado * 1 + (ContribMuni.toString(),acumulado);
+            acumulado = acumulado * 1 + (ContribMuni.getValor() / 100);
             f.generarItemFactura(IVA.toString(), acumulado);
+
             
-            
-
-            if (acumulado < topeSubsidio) {
-                
-                return f;
-            } else {
-                return null;
-            }
-
-
+            return f;
 
         }
         return null;

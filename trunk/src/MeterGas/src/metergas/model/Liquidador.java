@@ -15,7 +15,7 @@ public abstract class Liquidador {
     
     protected Collection<Concepto> conceptos;
     
-    abstract Factura liquidar(Cliente c);
+    public abstract Factura liquidar(Cliente c);
     
     protected Concepto buscarConcepto(int codigo){
         Concepto c;
