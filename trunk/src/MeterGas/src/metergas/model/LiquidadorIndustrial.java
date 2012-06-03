@@ -4,6 +4,7 @@
  */
 package metergas.model;
 
+import java.util.Collection;
 import java.util.Vector;
 
 /**
@@ -11,11 +12,12 @@ import java.util.Vector;
  * @author chalom85
  */
 public class LiquidadorIndustrial extends Liquidador {
-    
-    public LiquidadorIndustrial(){
-        this.conceptos = new Vector<Concepto>();
+
+    public LiquidadorIndustrial(Collection<Concepto> conceptos) {
+        super(conceptos);
     }
 
+    
     @Override
     public Factura liquidar(Cliente c) {
 

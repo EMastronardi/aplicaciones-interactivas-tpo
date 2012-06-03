@@ -7,19 +7,13 @@ package metergas.controller;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Vector;
-import metergas.model.Cliente;
-import metergas.model.ClienteResidencial;
-import metergas.model.ClienteIndustrial;
-import metergas.model.Concepto;
-import metergas.model.Domicilio;
-import metergas.model.Factura;
+import metergas.model.*;
 import metergas.model.views.ClienteView;
 import metergas.model.views.ClienteResidencialView;
 import metergas.model.views.ClienteIndustrialView;
 import metergas.model.views.DomicilioView;
 import metergas.model.views.ViewConcepto;
 import metergas.model.views.ViewDataItem;
-import metergas.model.Liquidador;
 
 /**
  *
@@ -216,4 +210,55 @@ public class MeterGasController {
             LiquidacionSubsidioSubject.getInstance().notifySubsidiosAplicados(this.getAcumuladorSubsidios());
         }
     }
+    
+    public void inicializar() {
+        
+        //Crear los parámetros
+        conceptos.add(new Concepto("M3 Residencial", 1, ConceptoEnum.M3RESIDENCIAL.getTipoConcepto()));
+        conceptos.add(new Concepto("M3 Industrial", 2, ConceptoEnum.M3INDUSTRIAL.getTipoConcepto()));
+        conceptos.add(new Concepto("IVA Consumidor Final", 21, ConceptoEnum.IVACONSUMIDORFINAL.getTipoConcepto()));
+        conceptos.add(new Concepto("IVA Responsable Inscripto",(float)10.5,ConceptoEnum.IVARESPONSABLE.getTipoConcepto()));
+        conceptos.add(new Concepto("Contribuciones Municipales", 3,ConceptoEnum.CONTRIBUCIONESMUNICIPALES.getTipoConcepto() ));
+        conceptos.add(new Concepto("Tope Subsidio Residencial", 150,ConceptoEnum.TOPESUBSIDIORESIDENCIAL.getTipoConcepto() ));
+        conceptos.add(new Concepto("Tope Sin Transporte", 700, ConceptoEnum.TOPESINTRANSPORTE.getTipoConcepto()));
+        conceptos.add(new Concepto("Subsidio Residencial", 5,ConceptoEnum.SUBSIDIORESIDENCIAL.getTipoConcepto() ));
+        conceptos.add(new Concepto("Impuesto Ingresos Brutos", 3, ConceptoEnum.IIBB.getTipoConcepto()));
+        conceptos.add(new Concepto("Costo por Transporte", 3, ConceptoEnum.TRANSPORTE.getTipoConcepto()));
+        
+        Collection<Concepto> con = new Vector<Concepto>();
+        con.add(buscarConcepto(ConceptoEnum.M3RESIDENCIAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.IVACONSUMIDORFINAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.CONTRIBUCIONESMUNICIPALES.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.TOPESUBSIDIORESIDENCIAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.SUBSIDIORESIDENCIAL.getTipoConcepto()));
+        
+        //Crear los liquidadrores
+        liquidadores.add(new LiquidadorResidencialSubsidiado(con));
+        
+        con.removeAll(con);
+        
+        con.add(buscarConcepto(ConceptoEnum.M3RESIDENCIAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.IVACONSUMIDORFINAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.CONTRIBUCIONESMUNICIPALES.getTipoConcepto()));
+        
+        liquidadores.add(new LiquidadorResidencial(con));
+        
+        con.removeAll(con);
+        
+        con.add(buscarConcepto(ConceptoEnum.M3INDUSTRIAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.IVARESPONSABLE.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.IIBB.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.TOPESINTRANSPORTE.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.TRANSPORTE.getTipoConcepto()));
+        
+        liquidadores.add(new LiquidadorIndustrialConTransporte(con));
+        
+        con.removeAll(con);
+        con.add(buscarConcepto(ConceptoEnum.M3INDUSTRIAL.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.IVARESPONSABLE.getTipoConcepto()));
+        con.add(buscarConcepto(ConceptoEnum.IIBB.getTipoConcepto()));
+        
+        liquidadores.add(new LiquidadorIndustrial(con));
+    }
+    
 }

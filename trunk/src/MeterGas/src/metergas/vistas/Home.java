@@ -6,9 +6,15 @@ package metergas.vistas;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.WindowConstants;
+import metergas.controller.MeterGasController;
+import metergas.model.views.ClienteIndustrialView;
+import metergas.model.views.ClienteResidencialView;
+import metergas.model.views.ClienteView;
+import metergas.model.views.DomicilioView;
 import metergas.vistas.clientes.JFrameBase;
 
 /**
@@ -106,16 +112,16 @@ public class Home extends javax.swing.JFrame {
         vista.addWindowListener(new WindowAdapter() {
 
             public void windowClosed(WindowEvent arg0) {
-                JFrameBase vistaCerrada = (JFrameBase)arg0.getSource();
+                JFrameBase vistaCerrada = (JFrameBase) arg0.getSource();
                 vistaCerrada.clear();
-                
+
                 ventanaPrincipal.setFocusableWindowState(true);
                 ventanaPrincipal.setVisible(true);
             }
         });
 
         vista.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
+
         vista.setVisible(true);
         this.setVisible(false);
 
@@ -156,12 +162,50 @@ public class Home extends javax.swing.JFrame {
         /*
          * Create and display the form
          */
-        java.awt.EventQueue.invokeLater(new Runnable() {
 
-            public void run() {
-                new Home().setVisible(true);
-            }
-        });
+        /*
+         * Instanciacion de parametria y clases de base
+         *
+         */
+        
+        MeterGasController mg = MeterGasController.getInstance();
+
+        mg.inicializar();
+        DomicilioView dv = new DomicilioView("Alem", "7", "5", "A", "1878", "Quilmes", "Buenos Aires");
+
+        ClienteView cv = new ClienteResidencialView("Ronnie James", "Dio", "111111", 0, null, dv);
+        mg.altaCliente(cv);
+
+        cv = new ClienteResidencialView("Steve", "Harris", "222222", 0, null, dv);
+        mg.altaCliente(cv);
+
+        cv = new ClienteIndustrialView("Deep Purple", "123", "Responsable Inscripto", "333333", 0, null, dv);
+        mg.altaCliente(cv);
+
+        cv = new ClienteIndustrialView("Iron Maiden", "456", "Responsable Inscripto", "444444", 0, null, dv);
+        mg.altaCliente(cv);
+
+        mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(2, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(2, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(4, new Date(2012, 05, 10), 200);
+        
+        
+        /*
+         * Invocacion de la ventana principal
+         *
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         *
+         * public void run() { new Home().setVisible(true); } });
+         *
+         */
+
+
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuAlta;
