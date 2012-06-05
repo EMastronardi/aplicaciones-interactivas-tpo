@@ -16,6 +16,13 @@ import metergas.model.views.ViewDataItem;
  */
 public abstract class Cliente {
 
+    private int id;
+    private Domicilio domicilio;
+    private String estado;
+    private Vector<Medicion> mediciones;
+    private static int ultimoId = 0;
+    private Vector<Factura> facturas;
+
     /**
      * @return the ultimoId
      */
@@ -30,12 +37,7 @@ public abstract class Cliente {
     private static void setUltimoId(int aUltimoId) {
         ultimoId = aUltimoId;
     }
-    private int id;
-    private Domicilio domicilio;
-    private String estado;
-    private Vector<Medicion> mediciones;
-    private static int ultimoId = 0;
-    private Vector<Factura> facturas;
+    
 
     protected Cliente(Domicilio domicilio) {
         this.id = getUltimoId();

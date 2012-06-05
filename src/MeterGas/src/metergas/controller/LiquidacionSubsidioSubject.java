@@ -9,15 +9,18 @@ package metergas.controller;
  * @author Checho
  */
 public class LiquidacionSubsidioSubject {
-    
-    private static LiquidacionSubsidioSubject instance = new LiquidacionSubsidioSubject();
+
+    private static LiquidacionSubsidioSubject instance;
     private float totalSubsidio;
 
-    static LiquidacionSubsidioSubject getInstance(){
+    static LiquidacionSubsidioSubject getInstance() {
+        if (instance == null) {
+            instance = new LiquidacionSubsidioSubject();
+        }
         return instance;
     }
-    
-    public void notifySubsidiosAplicados(float total){
+
+    public void notifySubsidiosAplicados(float total) {
         totalSubsidio += total;
     }
 }
