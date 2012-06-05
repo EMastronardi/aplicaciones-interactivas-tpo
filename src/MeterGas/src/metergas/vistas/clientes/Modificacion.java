@@ -4,12 +4,13 @@
  */
 package metergas.vistas.clientes;
 
+import metergas.vistas.clientes.contratos.FormularioClienteInterface;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import metergas.controller.MeterGasController;
 import metergas.model.views.ClienteView;
-import metergas.vistas.clientes.contratos.FormularioClienteInterface;
 
 /**
  *
@@ -35,18 +36,14 @@ public class Modificacion extends JFrameBase {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtIdCliente = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
         pnlFormulario = new javax.swing.JPanel();
+        btnBuscar = new javax.swing.JButton();
+        txtIdCliente = new javax.swing.JTextField();
+        lblIdCliente = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Id Cliente");
-        jLabel1.setPreferredSize(new java.awt.Dimension(200, 30));
-
-        txtIdCliente.setPreferredSize(new java.awt.Dimension(300, 30));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -55,99 +52,112 @@ public class Modificacion extends JFrameBase {
             }
         });
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.setEnabled(false);
+        txtIdCliente.setPreferredSize(new java.awt.Dimension(200, 30));
 
-        javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
-        pnlFormulario.setLayout(pnlFormularioLayout);
-        pnlFormularioLayout.setHorizontalGroup(
-            pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
-        );
-        pnlFormularioLayout.setVerticalGroup(
-            pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
+        lblIdCliente.setText("Id Cliente");
+        lblIdCliente.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(525, 525, 525)
+                        .addGap(295, 295, 295)
                         .addComponent(btnGuardar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
-                .addGap(30, 30, 30)
-                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addContainerGap())
+                .addGap(9, 9, 9))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        ClienteView cliente = MeterGasController.getInstance().buscarYMostrarCliente(Integer.parseInt(txtIdCliente.getText().trim()));
-        pnlFormulario.removeAll();
-        this.pack();
-        formulario = null;
-        if (cliente != null) {
-            try {
+        try {
+            ClienteView cliente = MeterGasController.getInstance().buscarYMostrarCliente(Integer.parseInt(txtIdCliente.getText().trim()));
+            pnlFormulario.removeAll();
+            this.pack();
+            formulario = null;
+            if (cliente != null) {
                 try {
-                    JPanel formularioView = (JPanel) Class.forName(cliente.getViewType().getCodigo()).newInstance();
-                    formularioView.setVisible(true);
+                    try {
+                        JPanel formularioView = (JPanel) Class.forName(cliente.getViewType().getCodigo()).newInstance();
+                        formularioView.setVisible(true);
 
-                    pnlFormulario.add((JPanel) formularioView);
-                    
-                    formulario = (FormularioClienteInterface) formularioView;
-                    formulario.cargarCliente(cliente);
-                    this.pack();
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
+                        pnlFormulario.add((JPanel) formularioView);
+
+                        formulario = (FormularioClienteInterface) formularioView;
+                        formulario.cargarCliente(cliente);
+                        this.pack();
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Modificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
+            else{
+                JOptionPane.showMessageDialog(null, "No existe el cliente ingresado", "Notificación", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        btnGuardar.setEnabled(formulario != null);
-
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            MeterGasController.getInstance().modificarCliente(formulario.getCliente());
+
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblIdCliente;
     private javax.swing.JPanel pnlFormulario;
     private javax.swing.JTextField txtIdCliente;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void clear() {
-        
+        txtIdCliente.setText("");
+        pnlFormulario.removeAll();;
     }
 }

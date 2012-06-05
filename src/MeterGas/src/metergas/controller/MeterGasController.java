@@ -170,16 +170,29 @@ public class MeterGasController {
         this.addCliente(c);
     }
 
-    public void modificarCliente(ClienteView vc) {
+    public void modificarCliente(ClienteView vc) throws Exception {
         Cliente c = this.buscarCliente(vc.getId());
+        
+        if(c == null)
+            throw new Exception("El cliente ingresado no existe");
+        
+        if(!c.isActivo())
+            throw new Exception("El cliente no puede ser modificado ya que se encuentra inhabilitado");
         
         c.actualizarCliente(vc);
     }
 
-    public void eliminarCliente(int idCliente) {
+    public void eliminarCliente(int idCliente) throws Exception {
         Cliente c;
 
         c = this.buscarCliente(idCliente);
+        
+        if(c == null)
+            throw new Exception("El cliente ingresado no existe");
+        
+        if(!c.isActivo())
+            throw new Exception("El cliente ya se encuentra inhabilitado");
+        
         c.bajaCliente();
     }
     
@@ -271,6 +284,16 @@ public class MeterGasController {
 
     public void imprimirSubsidio() {
         System.out.println(getAcumuladorSubsidios());
+    }
+
+    public Vector<ViewConcepto> getConceptos() {
+        Vector<ViewConcepto> resultado = new Vector<ViewConcepto>();
+        
+        for (Concepto concepto : this.conceptos) {
+            resultado.add(concepto.getViewConcepto());
+        }
+        
+        return resultado;
     }
     
 }

@@ -11,5 +11,7 @@ import javax.swing.JFrame;
  * @author eteodoro
  */
 public abstract class JFrameBase extends JFrame {
+    
+    
     public abstract void clear();
 }

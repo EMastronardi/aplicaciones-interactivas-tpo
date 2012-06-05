@@ -13,7 +13,7 @@ import metergas.vistas.clientes.contratos.FormularioClienteInterface;
  * @author eteodoro
  */
 public class FormularioIndustrial extends javax.swing.JPanel implements FormularioClienteInterface {
-
+    protected int id = 0;
     /**
      * Creates new form FormularioIndustrial
      */
@@ -119,13 +119,13 @@ public class FormularioIndustrial extends javax.swing.JPanel implements Formular
     @Override
     public ClienteView getCliente() {
         return new ClienteIndustrialView(txtRazonSocial.getText(), txtNroIBB.getText(), txtCondicionFiscal.getText(),
-                txtCUIT.getText(),0,"", formularioDomicilio.getDomicilio());
+                txtCUIT.getText(),id,"", formularioDomicilio.getDomicilio());
     }
     
     @Override
     public void cargarCliente(ClienteView c) {
         ClienteIndustrialView cliente = (ClienteIndustrialView) c;
-        
+        id = cliente.getId();
         txtRazonSocial.setText(cliente.getRazonSocial());
         txtNroIBB.setText(cliente.getNroIIBB());
         txtCondicionFiscal.setText(cliente.getCondicionFiscal());
