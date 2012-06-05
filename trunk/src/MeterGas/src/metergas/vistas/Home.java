@@ -48,6 +48,8 @@ public class Home extends javax.swing.JFrame {
         jMenuAlta = new javax.swing.JMenuItem();
         jMenuBaja = new javax.swing.JMenuItem();
         jMenuModificacion = new javax.swing.JMenuItem();
+        jMenuConceptos = new javax.swing.JMenu();
+        jMenuItemAdministrar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +85,18 @@ public class Home extends javax.swing.JFrame {
         jMenuClientes.add(jMenuModificacion);
 
         jMenuBar.add(jMenuClientes);
+
+        jMenuConceptos.setText("Conceptos");
+
+        jMenuItemAdministrar.setText("Administrar");
+        jMenuItemAdministrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
+        jMenuConceptos.add(jMenuItemAdministrar);
+
+        jMenuBar.add(jMenuConceptos);
 
         setJMenuBar(jMenuBar);
 
@@ -120,8 +134,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        vista.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        vista.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        
         vista.setVisible(true);
         this.setVisible(false);
 
@@ -167,51 +182,54 @@ public class Home extends javax.swing.JFrame {
          * Instanciacion de parametria y clases de base
          *
          */
-        
-        MeterGasController mg = MeterGasController.getInstance();
-
-        mg.inicializar();
-        DomicilioView dv = new DomicilioView("Alem", "7", "5", "A", "1878", "Quilmes", "Buenos Aires");
-
-        ClienteView cv = new ClienteResidencialView("Ronnie James", "Dio", "111111", 0, null, dv);
-        mg.altaCliente(cv);
-
-        cv = new ClienteResidencialView("Steve", "Harris", "222222", 0, null, dv);
-        mg.altaCliente(cv);
-
-        cv = new ClienteIndustrialView("Deep Purple", "123", "Responsable Inscripto", "333333", 0, null, dv);
-        mg.altaCliente(cv);
-
-        cv = new ClienteIndustrialView("Iron Maiden", "456", "Responsable Inscripto", "444444", 0, null, dv);
-        mg.altaCliente(cv);
-
-        mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
-        mg.registrarMedicion(2, new Date(2012, 03, 10), 50);
-        mg.registrarMedicion(2, new Date(2012, 05, 10), 400);
-        mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
-        mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(4, new Date(2012, 05, 10), 1000);
-        
-        mg.eliminarCliente(2);
-        
-        mg.generarLiquidacion();
-        
-        mg.imprimirFacturas();
-        
-        mg.imprimirSubsidio();
-        
+//        
+//        MeterGasController mg = MeterGasController.getInstance();
+//
+//        mg.inicializar();
+//        DomicilioView dv = new DomicilioView("Alem", "7", "5", "A", "1878", "Quilmes", "Buenos Aires");
+//
+//        ClienteView cv = new ClienteResidencialView("Ronnie James", "Dio", "111111", 0, null, dv);
+//        mg.altaCliente(cv);
+//
+//        cv = new ClienteResidencialView("Steve", "Harris", "222222", 0, null, dv);
+//        mg.altaCliente(cv);
+//
+//        cv = new ClienteIndustrialView("Deep Purple", "123", "Responsable Inscripto", "333333", 0, null, dv);
+//        mg.altaCliente(cv);
+//
+//        cv = new ClienteIndustrialView("Iron Maiden", "456", "Responsable Inscripto", "444444", 0, null, dv);
+//        mg.altaCliente(cv);
+//
+//        mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
+//        mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
+//        mg.registrarMedicion(2, new Date(2012, 03, 10), 50);
+//        mg.registrarMedicion(2, new Date(2012, 05, 10), 400);
+//        mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
+//        mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
+//        mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
+//        mg.registrarMedicion(4, new Date(2012, 05, 10), 1000);
+//        
+//        mg.eliminarCliente(2);
+//        
+//        mg.generarLiquidacion();
+//        
+//        mg.imprimirFacturas();
+//        
+//        mg.imprimirSubsidio();
+//        
         /*
          * Invocacion de la ventana principal
          *
-         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * 
          *
-         * public void run() { new Home().setVisible(true); } });
+         * 
          *
          */
 
-
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() { new Home().setVisible(true); } });
+        
+        
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -219,6 +237,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuBaja;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuClientes;
+    private javax.swing.JMenu jMenuConceptos;
+    private javax.swing.JMenuItem jMenuItemAdministrar;
     private javax.swing.JMenuItem jMenuModificacion;
     // End of variables declaration//GEN-END:variables
 

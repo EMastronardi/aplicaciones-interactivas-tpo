@@ -101,6 +101,9 @@ public abstract class Cliente {
         return estado;
     }
 
+    public boolean isActivo(){
+        return !getEstado().equals("Inactivo");
+    }
     /**
      * @return the mediocines
      */
