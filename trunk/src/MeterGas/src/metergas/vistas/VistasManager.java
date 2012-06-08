@@ -22,6 +22,8 @@ public class VistasManager {
         vistas.put("Clientes.Baja", new metergas.vistas.clientes.Baja());
         vistas.put("Clientes.Modificacion", new metergas.vistas.clientes.Modificacion());
         vistas.put("Conceptos.Administrar", new metergas.vistas.conceptos.Administrar());
+        vistas.put("Mediciones.Nueva", new metergas.vistas.mediciones.NuevaMedicion());
+        vistas.put("Liquidaciones.Nueva", new metergas.vistas.liquidaciones.Liquidacion());
     }
 
     public static VistasManager getInstance() {

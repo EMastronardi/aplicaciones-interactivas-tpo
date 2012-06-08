@@ -14,4 +14,5 @@ import metergas.model.views.DomicilioView;
 public interface FormularioDomicilioInterface {
     public DomicilioView getDomicilio();
     public void cargarDomicilio(DomicilioView domicilio);
+    public void clean();
 }

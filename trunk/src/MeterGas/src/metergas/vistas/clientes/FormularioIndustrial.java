@@ -4,6 +4,8 @@
  */
 package metergas.vistas.clientes;
 
+import java.awt.Component;
+import javax.swing.JTextField;
 import metergas.model.views.ClienteIndustrialView;
 import metergas.model.views.ClienteView;
 import metergas.vistas.clientes.contratos.FormularioClienteInterface;
@@ -132,5 +134,15 @@ public class FormularioIndustrial extends javax.swing.JPanel implements Formular
         txtCUIT.setText(cliente.getCUIT());
         formularioDomicilio.cargarDomicilio(cliente.getDomicilio());
         
+    }
+
+    @Override
+    public void clear() {
+        for (Component component : this.getComponents()) {
+            if(component instanceof JTextField){
+                ((JTextField)component).setText("");
+            }
+        }
+        formularioDomicilio.clean();
     }
 }

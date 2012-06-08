@@ -44,8 +44,10 @@ public class Alta extends JFrameBase {
         pnlFormulario = new javax.swing.JPanel();
         btnCrear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Alta de un cliente");
 
         jComboTiposCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboTiposCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +92,7 @@ public class Alta extends JFrameBase {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboTiposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
                 .addGap(16, 16, 16)
                 .addComponent(btnCrear)
                 .addContainerGap())
@@ -150,7 +152,8 @@ public class Alta extends JFrameBase {
     @Override
     public void clear() {
         jComboTiposCliente.setSelectedIndex(0);
-
+        if(formulario != null)
+            formulario.clear();
     }
 
     private void cargarCombo() {

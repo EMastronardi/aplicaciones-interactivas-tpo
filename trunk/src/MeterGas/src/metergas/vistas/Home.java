@@ -4,12 +4,14 @@
  */
 package metergas.vistas;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.WindowConstants;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import metergas.controller.MeterGasController;
 import metergas.model.views.ClienteIndustrialView;
 import metergas.model.views.ClienteResidencialView;
@@ -32,6 +34,12 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         ventanaPrincipal = this;
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        int inset = 0;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds(inset, inset,
+                screenSize.width - inset * 2,
+                screenSize.height - inset * 2);
+
     }
 
     /**
@@ -43,6 +51,7 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        desktop = new javax.swing.JDesktopPane();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuClientes = new javax.swing.JMenu();
         jMenuAlta = new javax.swing.JMenuItem();
@@ -50,8 +59,16 @@ public class Home extends javax.swing.JFrame {
         jMenuModificacion = new javax.swing.JMenuItem();
         jMenuConceptos = new javax.swing.JMenu();
         jMenuItemAdministrar = new javax.swing.JMenuItem();
+        jMenuMediciones = new javax.swing.JMenu();
+        jMenuNuevaMedicion = new javax.swing.JMenuItem();
+        jMenuLiquidaciones = new javax.swing.JMenu();
+        jMenuNuevaLiquidacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        desktop.setVerifyInputWhenFocusTarget(false);
+        getContentPane().add(desktop);
 
         jMenuClientes.setText("Clientes");
         jMenuClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -98,18 +115,33 @@ public class Home extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuConceptos);
 
-        setJMenuBar(jMenuBar);
+        jMenuMediciones.setText("Mediciones");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
-        );
+        jMenuNuevaMedicion.setText("Registrar medición");
+        jMenuNuevaMedicion.setActionCommand("Nueva");
+        jMenuNuevaMedicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
+        jMenuMediciones.add(jMenuNuevaMedicion);
+
+        jMenuBar.add(jMenuMediciones);
+
+        jMenuLiquidaciones.setText("Liquidaciones");
+
+        jMenuNuevaLiquidacion.setText("Generar");
+        jMenuNuevaLiquidacion.setActionCommand("Nueva");
+        jMenuNuevaLiquidacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
+        jMenuLiquidaciones.add(jMenuNuevaLiquidacion);
+
+        jMenuBar.add(jMenuLiquidaciones);
+
+        setJMenuBar(jMenuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -122,25 +154,47 @@ public class Home extends javax.swing.JFrame {
         JFrameBase vista = VistasManager.getInstance().getVista(String.format("%s.%s", menu.getActionCommand(),
                 source.getActionCommand()));
 
+        
+        vista.addInternalFrameListener(new InternalFrameListener() {
 
-        vista.addWindowListener(new WindowAdapter() {
-
-            public void windowClosed(WindowEvent arg0) {
-                JFrameBase vistaCerrada = (JFrameBase) arg0.getSource();
-                vistaCerrada.clear();
-
-                ventanaPrincipal.setFocusableWindowState(true);
-                ventanaPrincipal.setVisible(true);
+            @Override
+            public void internalFrameOpened(InternalFrameEvent e) {
             }
+
+
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e) {
+                JFrameBase vistaCerrada = (JFrameBase) e.getSource();
+                vistaCerrada.clear();
+            }
+
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+            }
+
+            @Override
+            public void internalFrameIconified(InternalFrameEvent e) {
+            }
+
+            @Override
+            public void internalFrameDeiconified(InternalFrameEvent e) {
+            }
+
+            @Override
+            public void internalFrameActivated(InternalFrameEvent e) {
+            }
+
+            @Override
+            public void internalFrameDeactivated(InternalFrameEvent e) {
+            }
+          
         });
-
-        vista.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
         
         vista.setVisible(true);
-        this.setVisible(false);
-
-
+        vista.setFocusable(true);
+        
+        desktop.remove(vista);
+        desktop.add(vista);
     }//GEN-LAST:event_jMenuActionPerformed
 
     /**
@@ -220,26 +274,35 @@ public class Home extends javax.swing.JFrame {
         /*
          * Invocacion de la ventana principal
          *
-         * 
          *
-         * 
+         *
+         *
          *
          */
 
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() { new Home().setVisible(true); } });
-        
-        
+
+            public void run() {
+                new Home().setVisible(true);
+            }
+        });
+
+
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenuItem jMenuAlta;
     private javax.swing.JMenuItem jMenuBaja;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuClientes;
     private javax.swing.JMenu jMenuConceptos;
     private javax.swing.JMenuItem jMenuItemAdministrar;
+    private javax.swing.JMenu jMenuLiquidaciones;
+    private javax.swing.JMenu jMenuMediciones;
     private javax.swing.JMenuItem jMenuModificacion;
+    private javax.swing.JMenuItem jMenuNuevaLiquidacion;
+    private javax.swing.JMenuItem jMenuNuevaMedicion;
     // End of variables declaration//GEN-END:variables
 
     /**
