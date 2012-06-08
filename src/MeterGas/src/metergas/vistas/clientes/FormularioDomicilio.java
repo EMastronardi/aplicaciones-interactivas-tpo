@@ -4,6 +4,8 @@
  */
 package metergas.vistas.clientes;
 
+import java.awt.Component;
+import javax.swing.JTextField;
 import metergas.model.views.DomicilioView;
 import metergas.vistas.clientes.contratos.FormularioDomicilioInterface;
 
@@ -177,5 +179,14 @@ public class FormularioDomicilio extends javax.swing.JPanel implements Formulari
         txtCodigoPostal.setText(domicilio.getCodigoPostal());
         txtLocalidad.setText(domicilio.getLocalidad());
         txtProvincia.setText(domicilio.getProvincia());
+    }
+
+    @Override
+    public void clean() {
+        for (Component component : this.getComponents()) {
+            if(component instanceof JTextField){
+                ((JTextField)component).setText("");
+            }
+        }
     }
 }

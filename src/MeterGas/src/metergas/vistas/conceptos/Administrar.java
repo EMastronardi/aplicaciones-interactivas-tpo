@@ -4,7 +4,16 @@
  */
 package metergas.vistas.conceptos;
 
+import java.lang.reflect.Field;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import metergas.controller.MeterGasController;
 import metergas.model.views.ViewConcepto;
 import metergas.vistas.clientes.JFrameBase;
@@ -14,13 +23,17 @@ import metergas.vistas.clientes.JFrameBase;
  * @author eteodoro
  */
 public class Administrar extends JFrameBase {
-
+    protected Vector<ViewConcepto> conceptos;
+    public ConceptosTableModel model;
     /**
      * Creates new form Administrar
      */
     public Administrar() {
+
         initComponents();
         cargarConceptos();
+        
+        
     }
 
     /**
@@ -33,25 +46,27 @@ public class Administrar extends JFrameBase {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblConceptos = new javax.swing.JTable();
+        btnGuardar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Administración de conceptos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblConceptos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Codigo", "Descripción", "Valor"
+                "Código", "Descripción", "Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -62,27 +77,51 @@ public class Administrar extends JFrameBase {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblConceptos.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tblConceptos);
+        tblConceptos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addGap(141, 141, 141)
+                .addComponent(btnGuardar)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+              for (ViewConcepto viewConcepto : conceptos) {
+            MeterGasController.getInstance().modificarTarifa(viewConcepto.getCodigo(), 
+                    viewConcepto.getConcepto(), viewConcepto.getValor());
+        }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,8 +165,9 @@ public class Administrar extends JFrameBase {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblConceptos;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -135,6 +175,57 @@ public class Administrar extends JFrameBase {
     }
 
     private void cargarConceptos() {
-        Vector<ViewConcepto> conceptos = MeterGasController.getInstance().getConceptos();
+        conceptos = MeterGasController.getInstance().getConceptos();
+        model = new ConceptosTableModel(conceptos);
+         tblConceptos.setModel(new javax.swing.table.DefaultTableModel(
+            model.getRowData(),
+            model.getColumnNames()
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+         
+         tblConceptos.getModel().addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                System.out.println(e);
+                int firstRow = e.getFirstRow();
+                int column = e.getColumn();
+                Object valor = tblConceptos.getModel().getValueAt(firstRow, column);
+                
+                ViewConcepto concepto = conceptos.get(firstRow);
+                String columnName = tblConceptos.getColumnName(column);
+                try {
+                    try {
+                        Field field = concepto.getClass().getDeclaredField(columnName);
+                        field.setAccessible(true);
+                        field.set(concepto, valor);
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(Administrar.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(Administrar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (NoSuchFieldException ex) {
+                    Logger.getLogger(Administrar.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(Administrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
     }
+    
 }

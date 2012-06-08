@@ -42,8 +42,10 @@ public class Modificacion extends JFrameBase {
         lblIdCliente = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Modificación del cliente");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +96,7 @@ public class Modificacion extends JFrameBase {
                     .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(49, 49, 49)
-                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
                 .addGap(9, 9, 9))

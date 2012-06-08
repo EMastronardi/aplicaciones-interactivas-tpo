@@ -13,4 +13,5 @@ import metergas.model.views.ClienteView;
 public interface FormularioClienteInterface {
     public ClienteView getCliente();
     public void cargarCliente(ClienteView cliente);
+    public void clear();
 }

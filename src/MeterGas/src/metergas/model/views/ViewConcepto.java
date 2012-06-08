@@ -28,7 +28,10 @@ public class ViewConcepto {
     public String getConcepto() {
         return concepto;
     }
-
+    
+    public int getCodigo(){
+        return codigo;
+    }
     /**
      * @param concepto the concepto to set
      */
