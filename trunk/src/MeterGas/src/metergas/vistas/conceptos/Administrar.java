@@ -172,6 +172,7 @@ public class Administrar extends JFrameBase {
 
     @Override
     public void clear() {
+        cargarConceptos();
     }
 
     private void cargarConceptos() {
