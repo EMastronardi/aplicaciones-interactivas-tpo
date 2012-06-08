@@ -45,8 +45,8 @@ public class Medicion implements Comparable<Medicion>{
 
     @Override
     public int compareTo(Medicion o) {
-        if (this.fecha.after(o.getFecha())) return 1;
         if (this.fecha.after(o.getFecha())) return -1;
+        if (this.fecha.after(o.getFecha())) return 1;
         return 0;
     }
 
