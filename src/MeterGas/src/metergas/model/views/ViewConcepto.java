@@ -11,14 +11,15 @@ import metergas.model.Concepto;
  * @author chalom85
  */
 public class ViewConcepto {
+
     private String concepto;
     private float valor;
     private int codigo;
-    
-    public ViewConcepto(Concepto c){
+
+    public ViewConcepto(Concepto c) {
         this.concepto = c.getConcepto();
         this.valor = c.getValor();
-        this.codigo = c.getCodigo();   
+        this.codigo = c.getCodigo();
     }
 
     /**
@@ -41,26 +42,4 @@ public class ViewConcepto {
     public float getValor() {
         return valor;
     }
-
-    /**
-     * @param valor the valor to set
-     */
-    public void setValor(float valor) {
-        this.valor = valor;
-    }
-
-    /**
-     * @return the codigo
-     */
-    public int getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-    
 }
