@@ -183,31 +183,31 @@ public class Home extends javax.swing.JFrame {
          *
          */
 //        
-//        MeterGasController mg = MeterGasController.getInstance();
-//
-//        mg.inicializar();
-//        DomicilioView dv = new DomicilioView("Alem", "7", "5", "A", "1878", "Quilmes", "Buenos Aires");
-//
-//        ClienteView cv = new ClienteResidencialView("Ronnie James", "Dio", "111111", 0, null, dv);
-//        mg.altaCliente(cv);
-//
-//        cv = new ClienteResidencialView("Steve", "Harris", "222222", 0, null, dv);
-//        mg.altaCliente(cv);
-//
-//        cv = new ClienteIndustrialView("Deep Purple", "123", "Responsable Inscripto", "333333", 0, null, dv);
-//        mg.altaCliente(cv);
-//
-//        cv = new ClienteIndustrialView("Iron Maiden", "456", "Responsable Inscripto", "444444", 0, null, dv);
-//        mg.altaCliente(cv);
-//
-//        mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
-//        mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
-//        mg.registrarMedicion(2, new Date(2012, 03, 10), 50);
-//        mg.registrarMedicion(2, new Date(2012, 05, 10), 400);
-//        mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
-//        mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
-//        mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
-//        mg.registrarMedicion(4, new Date(2012, 05, 10), 1000);
+        MeterGasController mg = MeterGasController.getInstance();
+
+        mg.inicializar();
+        DomicilioView dv = new DomicilioView("Alem", "7", "5", "A", "1878", "Quilmes", "Buenos Aires");
+
+        ClienteView cv = new ClienteResidencialView("Ronnie James", "Dio", "111111", 0, null, dv);
+        mg.altaCliente(cv);
+
+        cv = new ClienteResidencialView("Steve", "Harris", "222222", 0, null, dv);
+        mg.altaCliente(cv);
+
+        cv = new ClienteIndustrialView("Deep Purple", "123", "Responsable Inscripto", "333333", 0, null, dv);
+        mg.altaCliente(cv);
+
+        cv = new ClienteIndustrialView("Iron Maiden", "456", "Responsable Inscripto", "444444", 0, null, dv);
+        mg.altaCliente(cv);
+
+        mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(2, new Date(2012, 03, 10), 50);
+        mg.registrarMedicion(2, new Date(2012, 05, 10), 400);
+        mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(4, new Date(2012, 05, 10), 1000);
 //        
 //        mg.eliminarCliente(2);
 //        
