@@ -236,7 +236,7 @@ public class Home extends javax.swing.JFrame {
          * Instanciacion de parametria y clases de base
          *
          */
-//        
+        
         MeterGasController mg = MeterGasController.getInstance();
 
         mg.inicializar();

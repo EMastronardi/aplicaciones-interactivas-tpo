@@ -223,6 +223,8 @@ public class MeterGasController {
         if (this.getAcumuladorSubsidios() > 0){
             LiquidacionSubsidioSubject.getInstance().notifySubsidiosAplicados(this.getAcumuladorSubsidios());
         }
+        
+        imprimirFacturas();
     }
     
     public void inicializar() {

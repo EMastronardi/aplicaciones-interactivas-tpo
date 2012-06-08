@@ -28,10 +28,11 @@ public class ViewConcepto {
     public String getConcepto() {
         return concepto;
     }
-    
-    public int getCodigo(){
+
+    public int getCodigo() {
         return codigo;
     }
+
     /**
      * @param concepto the concepto to set
      */
@@ -44,5 +45,19 @@ public class ViewConcepto {
      */
     public float getValor() {
         return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 }
