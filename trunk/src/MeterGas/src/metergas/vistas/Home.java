@@ -13,10 +13,10 @@ import javax.swing.WindowConstants;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import metergas.controller.MeterGasController;
-import metergas.model.views.ClienteIndustrialView;
-import metergas.model.views.ClienteResidencialView;
-import metergas.model.views.ClienteView;
-import metergas.model.views.DomicilioView;
+import metergas.model.vistas.ClienteIndustrialView;
+import metergas.model.vistas.ClienteResidencialView;
+import metergas.model.vistas.ClienteView;
+import metergas.model.vistas.DomicilioView;
 import metergas.vistas.clientes.JFrameBase;
 
 /**
@@ -239,29 +239,29 @@ public class Home extends javax.swing.JFrame {
         
         MeterGasController mg = MeterGasController.getInstance();
 
-        mg.inicializar();
+//        mg.inicializar();
         DomicilioView dv = new DomicilioView("Alem", "7", "5", "A", "1878", "Quilmes", "Buenos Aires");
 
         ClienteView cv = new ClienteResidencialView("Ronnie James", "Dio", "111111", 0, null, dv);
-        mg.altaCliente(cv);
+        int id1 = mg.altaCliente(cv);
 
         cv = new ClienteResidencialView("Steve", "Harris", "222222", 0, null, dv);
-        mg.altaCliente(cv);
+        int id2 = mg.altaCliente(cv);
 
         cv = new ClienteIndustrialView("Deep Purple", "123", "Responsable Inscripto", "333333", 0, null, dv);
-        mg.altaCliente(cv);
+        int id3 = mg.altaCliente(cv);
 
         cv = new ClienteIndustrialView("Iron Maiden", "456", "Responsable Inscripto", "444444", 0, null, dv);
-        mg.altaCliente(cv);
+        int id4 = mg.altaCliente(cv);
 
-        mg.registrarMedicion(1, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(1, new Date(2012, 05, 10), 200);
-        mg.registrarMedicion(2, new Date(2012, 03, 10), 50);
-        mg.registrarMedicion(2, new Date(2012, 05, 10), 400);
-        mg.registrarMedicion(3, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(3, new Date(2012, 05, 10), 200);
-        mg.registrarMedicion(4, new Date(2012, 03, 10), 100);
-        mg.registrarMedicion(4, new Date(2012, 05, 10), 1000);
+        mg.registrarMedicion(id1, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(id1, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(id2, new Date(2012, 03, 10), 50);
+        mg.registrarMedicion(id2, new Date(2012, 05, 10), 400);
+        mg.registrarMedicion(id3, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(id3, new Date(2012, 05, 10), 200);
+        mg.registrarMedicion(id4, new Date(2012, 03, 10), 100);
+        mg.registrarMedicion(id4, new Date(2012, 05, 10), 1000);
 //        
 //        mg.eliminarCliente(2);
 //        

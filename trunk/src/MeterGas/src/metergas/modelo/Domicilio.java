@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.model;
+package metergas.modelo;
 
-import metergas.model.views.DomicilioView;
+import metergas.model.vistas.DomicilioView;
 
 /**
  *

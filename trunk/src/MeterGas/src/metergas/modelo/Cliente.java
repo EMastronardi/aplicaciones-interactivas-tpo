@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.model;
+package metergas.modelo;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
-import metergas.model.views.ClienteView;
-import metergas.model.views.ViewDataItem;
+import metergas.model.vistas.ClienteView;
+import metergas.model.vistas.ViewDataItem;
 
 /**
  *
@@ -22,7 +22,8 @@ public abstract class Cliente {
     private Vector<Medicion> mediciones;
     private static int ultimoId = 0;
     private Vector<Factura> facturas;
-
+    
+    
     /**
      * @return the ultimoId
      */
@@ -40,7 +41,15 @@ public abstract class Cliente {
     
 
     protected Cliente(Domicilio domicilio) {
-        this.id = getUltimoId();
+        this.id = -1;
+        this.domicilio = domicilio;
+        this.estado = "Activo";
+        this.mediciones = new Vector<Medicion>();
+        this.facturas = new Vector<Factura>();
+    }
+    
+    protected Cliente(int id, Domicilio domicilio) {
+        this.id = id;
         this.domicilio = domicilio;
         this.estado = "Activo";
         this.mediciones = new Vector<Medicion>();
@@ -142,5 +151,17 @@ public abstract class Cliente {
      */
     protected void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public void setTipo(TipoClienteEnum tipo) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

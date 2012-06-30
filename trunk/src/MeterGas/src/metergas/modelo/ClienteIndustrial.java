@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.model;
+package metergas.modelo;
 
-import metergas.model.ClienteIndustrial;
-import metergas.model.views.ClienteIndustrialView;
-import metergas.model.views.ClienteResidencialView;
-import metergas.model.views.ClienteView;
-import metergas.model.views.DomicilioView;
+import metergas.modelo.ClienteIndustrial;
+import metergas.model.vistas.ClienteIndustrialView;
+import metergas.model.vistas.ClienteResidencialView;
+import metergas.model.vistas.ClienteView;
+import metergas.model.vistas.DomicilioView;
 
 /**
  *
@@ -28,6 +28,15 @@ public class ClienteIndustrial extends Cliente {
         this.condicionFiscal = condicionFiscal;
         this.CUIT = CUIT;
     }
+    
+     public ClienteIndustrial(int id, String razonSocial, String nroIIBB, String condicionFiscal, String CUIT, Domicilio domicilio) {
+        super(id, domicilio);
+        this.razonSocial = razonSocial;
+        this.nroIIBB = nroIIBB;
+        this.condicionFiscal = condicionFiscal;
+        this.CUIT = CUIT;
+    }
+
 
     /**
      * @return the razonSocial
