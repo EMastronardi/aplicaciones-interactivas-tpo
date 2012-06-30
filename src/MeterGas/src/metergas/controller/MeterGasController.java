@@ -4,16 +4,30 @@
  */
 package metergas.controller;
 
+import metergas.modelo.LiquidadorResidencial;
+import metergas.modelo.Domicilio;
+import metergas.modelo.Concepto;
+import metergas.modelo.Factura;
+import metergas.modelo.ConceptoEnum;
+import metergas.modelo.ClienteResidencial;
+import metergas.modelo.Liquidador;
+import metergas.modelo.ClienteIndustrial;
+import metergas.modelo.LiquidadorIndustrial;
+import metergas.modelo.Cliente;
+import metergas.modelo.LiquidadorResidencialSubsidiado;
+import metergas.modelo.LiquidadorIndustrialConTransporte;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Vector;
-import metergas.model.*;
-import metergas.model.views.ClienteView;
-import metergas.model.views.ClienteResidencialView;
-import metergas.model.views.ClienteIndustrialView;
-import metergas.model.views.DomicilioView;
-import metergas.model.views.ViewConcepto;
-import metergas.model.views.ViewDataItem;
+import metergas.model.vistas.ClienteView;
+import metergas.model.vistas.ClienteResidencialView;
+import metergas.model.vistas.ClienteIndustrialView;
+import metergas.model.vistas.DomicilioView;
+import metergas.model.vistas.ViewConcepto;
+import metergas.model.vistas.ViewDataItem;
+import metergas.modelo.persistencia.ClienteDataAccess;
+import metergas.modelo.persistencia.ConceptoDataAccess;
+import metergas.modelo.persistencia.FacturaDataAccess;
 
 /**
  *
@@ -29,11 +43,15 @@ public class MeterGasController {
     private float acumuladorSubsidios;
 
     private MeterGasController() {
-        this.clientes = new Vector<Cliente>();
-        this.conceptos = new Vector<Concepto>();
-        this.facturas = new Vector<Factura>();
         this.liquidadores = new Vector<Liquidador>();
         this.acumuladorSubsidios = 0;
+        
+        inicializar();
+        this.clientes = ClienteDataAccess.getInstance().getClientes();
+        this.facturas = FacturaDataAccess.getInstance().getFacturas();
+        this.conceptos = ConceptoDataAccess.getInstance().getConceptos();
+        
+        
     }
 
     public static MeterGasController getInstance() {
@@ -70,6 +88,7 @@ public class MeterGasController {
 
         cliente = this.buscarCliente(idCliente);
         cliente.generarMedicion(valor, fecha);
+        ClienteDataAccess.getInstance().update(cliente);
     }
 
     public ClienteView buscarYMostrarCliente(int idCliente) {
@@ -103,6 +122,8 @@ public class MeterGasController {
             c.setConcepto(concepto);
             c.setValor(valor);
             resultado = true;
+            
+            ConceptoDataAccess.getInstance().update(c);
         }
 
         return resultado;
@@ -120,10 +141,12 @@ public class MeterGasController {
 
     private void addFactura(Factura f) {
         this.facturas.add(f);
+        FacturaDataAccess.getInstance().insert(f);
     }
 
     private void addCliente(Cliente c) {
         this.clientes.add(c);
+        ClienteDataAccess.getInstance().insert(c);
     }
 
     /**
@@ -145,7 +168,7 @@ public class MeterGasController {
         return this.liquidadores;
     }
 
-    public void altaCliente(ClienteView vc) {
+    public int altaCliente(ClienteView vc) {
         Cliente c = null;
         DomicilioView vd;
         Domicilio d;
@@ -168,6 +191,8 @@ public class MeterGasController {
         }
 
         this.addCliente(c);
+        return c.getId();
+        
     }
 
     public void modificarCliente(ClienteView vc) throws Exception {
@@ -180,6 +205,7 @@ public class MeterGasController {
             throw new Exception("El cliente no puede ser modificado ya que se encuentra inhabilitado");
         
         c.actualizarCliente(vc);
+        ClienteDataAccess.getInstance().update(c);
     }
 
     public void eliminarCliente(int idCliente) throws Exception {
@@ -194,6 +220,7 @@ public class MeterGasController {
             throw new Exception("El cliente ya se encuentra inhabilitado");
         
         c.bajaCliente();
+        ClienteDataAccess.getInstance().update(c);
     }
     
     public void generarLiquidacion(){
@@ -210,6 +237,7 @@ public class MeterGasController {
                         elementoCliente.addFactura(factura);
                         elementoCliente.liquidarUltimaMedicion();
                         this.addFactura(factura);
+                        ClienteDataAccess.getInstance().update(elementoCliente);
                         // si aplico subsidio actualizo el acumulador de subsidios
                         sub = factura.getSubsidio();
                         if (sub > 0){
@@ -228,7 +256,12 @@ public class MeterGasController {
     }
     
     public void inicializar() {
-        
+        facturas  = new Vector<Factura>();
+        conceptos = new Vector<Concepto>();
+        clientes = new Vector<Cliente>();
+        ClienteDataAccess.getInstance().removeAll();
+        ConceptoDataAccess.getInstance().removeAll();
+        FacturaDataAccess.getInstance().removeAll();
         //Crear los parámetros
         conceptos.add(new Concepto("M3 Residencial", 1, ConceptoEnum.M3RESIDENCIAL.getTipoConcepto()));
         conceptos.add(new Concepto("M3 Industrial", 2, ConceptoEnum.M3INDUSTRIAL.getTipoConcepto()));
@@ -240,6 +273,10 @@ public class MeterGasController {
         conceptos.add(new Concepto("Subsidio Residencial", 5,ConceptoEnum.SUBSIDIORESIDENCIAL.getTipoConcepto() ));
         conceptos.add(new Concepto("Impuesto Ingresos Brutos", 3, ConceptoEnum.IIBB.getTipoConcepto()));
         conceptos.add(new Concepto("Costo por Transporte", 3, ConceptoEnum.TRANSPORTE.getTipoConcepto()));
+        
+        for (Concepto concepto : conceptos) {
+            ConceptoDataAccess.getInstance().insert(concepto);
+        }
         
         Collection<Concepto> con = new Vector<Concepto>();
         con.add(buscarConcepto(ConceptoEnum.M3RESIDENCIAL.getTipoConcepto()));
@@ -281,7 +318,7 @@ public class MeterGasController {
         for (Factura factura : facturas) {
             System.out.println(factura.toString());
         }
-        ;
+        
     }
 
     public void imprimirSubsidio() {

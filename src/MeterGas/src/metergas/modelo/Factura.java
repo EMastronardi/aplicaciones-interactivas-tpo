@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.model;
+package metergas.modelo;
 
 import java.util.Collection;
 import java.util.Date;
@@ -29,6 +29,17 @@ public class Factura {
         this.items = new Vector<ItemFactura>();
         this.nro = getUltimoNro();
     }
+
+    public Factura(int nro, Date fecha, float consumo, Cliente cliente, Collection<ItemFactura> items, float subsidio) {
+        this.nro = nro;
+        this.fecha = fecha;
+        this.consumo = consumo;
+        this.cliente = cliente;
+        this.items = items;
+        this.subsidio = subsidio;
+    }
+    
+    
 
     public static int getUltimoNro(){
         return ultimoNro++;
@@ -106,11 +117,20 @@ public class Factura {
         return lala.toString();
     }
 
-    private Object getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    private int getNro() {
+    public int getNro() {
         return nro;
     }
+
+    public void setNro(int nro) {
+        this.nro = nro;
+    }
+
+    public Collection<ItemFactura> getItems(){
+        return this.items;
+    }
+    
 }

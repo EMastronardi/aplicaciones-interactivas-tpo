@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.model;
+package metergas.modelo;
 
-import metergas.model.views.ClienteResidencialView;
-import metergas.model.views.ClienteView;
-import metergas.model.views.DomicilioView;
+import metergas.model.vistas.ClienteResidencialView;
+import metergas.model.vistas.ClienteView;
+import metergas.model.vistas.DomicilioView;
 
 /**
  *
@@ -25,6 +25,7 @@ public class ClienteResidencial extends Cliente {
         this.apellido = apellido;
         this.dni = dni;
     }
+  
 
     /**
      * @return the nombre
