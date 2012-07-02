@@ -25,26 +25,12 @@ public class ItemFactura {
     }
 
     /**
-     * @param concepto the concepto to set
-     */
-    public void setConcepto(String concepto) {
-        this.concepto = concepto;
-    }
-
-    /**
      * @return the valor
      */
     public float getValor() {
         return valor;
     }
 
-    /**
-     * @param valor the valor to set
-     */
-    public void setValor(float valor) {
-        this.valor = valor;
-    }
-    
     public String toString(){
         return getConcepto() + " - " + String.valueOf(getValor());
         

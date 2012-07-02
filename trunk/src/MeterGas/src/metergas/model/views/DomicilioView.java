@@ -2,15 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.modelo;
-
-import metergas.model.views.DomicilioView;
+package metergas.model.views;
 
 /**
  *
  * @author Checho
  */
-public class Domicilio {
+public class DomicilioView {
 
     private String calle;
     private String altura;
@@ -20,7 +18,7 @@ public class Domicilio {
     private String localidad;
     private String provincia;
 
-    public Domicilio(String calle, String altura, String piso, String departamento, String codigoPostal, String localidad, String provincia) {
+    public DomicilioView(String calle, String altura, String piso, String departamento, String codigoPostal, String localidad, String provincia) {
         this.calle = calle;
         this.altura = altura;
         this.piso = piso;
@@ -29,13 +27,7 @@ public class Domicilio {
         this.localidad = localidad;
         this.provincia = provincia;
     }
-    
 
-    public String toString(){
-        return getCalle() + " " + getAltura() + "-" + getPiso() + getDepartamento() + ","
-                + getLocalidad() + " (" + getCodigoPostal() + "), " + getProvincia();
-    }
-    
     /**
      * @return the calle
      */
@@ -83,10 +75,6 @@ public class Domicilio {
      */
     public String getProvincia() {
         return provincia;
-    }
-
-    DomicilioView getView() {
-        return new DomicilioView(calle, altura, piso, departamento, codigoPostal, localidad, provincia);
     }
     
     

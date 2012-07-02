@@ -4,9 +4,9 @@
  */
 package metergas.modelo;
 
-import metergas.model.vistas.ClienteResidencialView;
-import metergas.model.vistas.ClienteView;
-import metergas.model.vistas.DomicilioView;
+import metergas.model.views.ClienteResidencialView;
+import metergas.model.views.ClienteView;
+import metergas.model.views.DomicilioView;
 
 /**
  *
