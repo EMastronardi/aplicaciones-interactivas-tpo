@@ -7,8 +7,8 @@ package metergas.modelo;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
-import metergas.model.vistas.ClienteView;
-import metergas.model.vistas.ViewDataItem;
+import metergas.model.views.ClienteView;
+import metergas.model.views.ViewDataItem;
 
 /**
  *
@@ -20,26 +20,9 @@ public abstract class Cliente {
     private Domicilio domicilio;
     private String estado;
     private Vector<Medicion> mediciones;
-    private static int ultimoId = 0;
     private Vector<Factura> facturas;
     
     
-    /**
-     * @return the ultimoId
-     */
-    public static int getUltimoId() {
-        ultimoId++;
-        return ultimoId;
-    }
-
-    /**
-     * @param aUltimoId the ultimoId to set
-     */
-    private static void setUltimoId(int aUltimoId) {
-        ultimoId = aUltimoId;
-    }
-    
-
     protected Cliente(Domicilio domicilio) {
         this.id = -1;
         this.domicilio = domicilio;
