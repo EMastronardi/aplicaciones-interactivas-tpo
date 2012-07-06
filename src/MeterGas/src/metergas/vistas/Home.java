@@ -13,10 +13,10 @@ import javax.swing.WindowConstants;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import metergas.controller.MeterGasController;
-import metergas.model.views.ClienteIndustrialView;
-import metergas.model.views.ClienteResidencialView;
-import metergas.model.views.ClienteView;
-import metergas.model.views.DomicilioView;
+import metergas.modelo.views.ClienteIndustrialView;
+import metergas.modelo.views.ClienteResidencialView;
+import metergas.modelo.views.ClienteView;
+import metergas.modelo.views.DomicilioView;
 import metergas.vistas.clientes.JFrameBase;
 
 /**

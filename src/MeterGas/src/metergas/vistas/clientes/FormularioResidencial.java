@@ -6,8 +6,8 @@ package metergas.vistas.clientes;
 
 import java.awt.Component;
 import javax.swing.JTextField;
-import metergas.model.views.ClienteResidencialView;
-import metergas.model.views.ClienteView;
+import metergas.modelo.views.ClienteResidencialView;
+import metergas.modelo.views.ClienteView;
 import metergas.vistas.clientes.contratos.FormularioClienteInterface;
 
 /**
