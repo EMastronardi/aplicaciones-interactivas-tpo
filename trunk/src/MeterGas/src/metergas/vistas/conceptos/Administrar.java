@@ -15,7 +15,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import metergas.controller.MeterGasController;
-import metergas.model.views.ViewConcepto;
+import metergas.modelo.views.ViewConcepto;
 import metergas.vistas.clientes.JFrameBase;
 
 /**

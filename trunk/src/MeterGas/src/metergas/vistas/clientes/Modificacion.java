@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import metergas.controller.MeterGasController;
-import metergas.model.views.ClienteView;
+import metergas.modelo.views.ClienteView;
 
 /**
  *

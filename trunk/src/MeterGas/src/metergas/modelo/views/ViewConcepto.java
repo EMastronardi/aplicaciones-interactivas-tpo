@@ -2,30 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package metergas.modelo;
+package metergas.modelo.views;
 
-import metergas.modelo.views.ViewConcepto;
+import metergas.modelo.Concepto;
 
 /**
  *
  * @author chalom85
  */
-public class Concepto {
+public class ViewConcepto {
+
     private String concepto;
     private float valor;
     private int codigo;
 
-    public Concepto(String concepto, float valor, int codigo) {
-        this.concepto = concepto;
-        this.valor = valor;
-        this.codigo = codigo;
+    public ViewConcepto(Concepto c) {
+        this.concepto = c.getConcepto();
+        this.valor = c.getValor();
+        this.codigo = c.getCodigo();
     }
-    
-     /**
+
+    /**
      * @return the concepto
      */
     public String getConcepto() {
         return concepto;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 
     /**
@@ -48,20 +53,11 @@ public class Concepto {
     public void setValor(float valor) {
         this.valor = valor;
     }
-    
-    public ViewConcepto getViewConcepto(){
-        return new ViewConcepto(this);
-    }
 
     /**
-     * @return the codigo
+     * @param codigo the codigo to set
      */
-    public int getCodigo() {
-        return codigo;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
-
-    public String toString() {
-        return getConcepto() + " - " + String.valueOf(getValor());
-    }
-    
 }

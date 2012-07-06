@@ -7,8 +7,8 @@ package metergas.modelo;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
-import metergas.model.views.ClienteView;
-import metergas.model.views.ViewDataItem;
+import metergas.modelo.views.ClienteView;
+import metergas.modelo.views.ViewDataItem;
 
 /**
  *

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import metergas.controller.MeterGasController;
-import metergas.model.views.ViewDataItem;
+import metergas.modelo.views.ViewDataItem;
 
 /**
  *

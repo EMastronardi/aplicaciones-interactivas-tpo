@@ -4,7 +4,7 @@
  */
 package metergas.vistas.clientes.contratos;
 
-import metergas.model.views.DomicilioView;
+import metergas.modelo.views.DomicilioView;
 
 
 /**
